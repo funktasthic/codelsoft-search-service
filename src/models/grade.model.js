@@ -30,11 +30,6 @@ const gradeSchema = new mongoose.Schema(
       ref: 'User',
       required: true,
     },
-    teacherId: {
-      type: String,
-      ref: 'User',
-      required: true,
-    },
   },
   {
     timestamps: true,
