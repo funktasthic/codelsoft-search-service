@@ -19,7 +19,7 @@ const validateJWT = async (req, res = response, next) => {
   try {
     const { id } = jwt.verify(token, process.env.JWT_SECRET);
 
-    const user = await User.findByPk(id);
+    const user = await User.findById(id);
 
     if (!user) {
       return res.status(401).json({
