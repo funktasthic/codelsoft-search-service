@@ -73,7 +73,7 @@ const validateToken = async (req = request, res = response) => {
   try {
     const { id } = jwt.verify(token, process.env.JWT_SECRET);
 
-    const user = await User.findByPk(id);
+    const user = await User.findById(id);
 
     const { name, lastName, email, roleId } = user;
 
@@ -89,7 +89,7 @@ const validateToken = async (req = request, res = response) => {
     if (user) {
       return res.status(200).json({
         success: true,
-        message: 'Token válido',
+        message: 'Token valid',
         data: dataUser,
       });
     }
@@ -97,14 +97,14 @@ const validateToken = async (req = request, res = response) => {
     if (error.name === 'TokenExpiredError') {
       return res.status(401).json({
         success: false,
-        message: 'Token expirado',
+        message: 'Token expired',
         expired: true,
         error,
       });
     }
     return res.status(401).json({
       success: false,
-      message: 'Token inválido',
+      message: 'Token invalid',
       error,
     });
   }
