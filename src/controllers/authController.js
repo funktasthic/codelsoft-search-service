@@ -1,5 +1,6 @@
 const { response, request } = require('express');
 const User = require('../models/user.model');
+const Role = require('../models/role.model');
 const bcryptjs = require('bcryptjs');
 const generateJWT = require('../utils/generateJWT');
 const jwt = require('jsonwebtoken');
@@ -29,17 +30,26 @@ const login = async (req = request, res = response) => {
       });
     }
 
+    // Verify role
+    const role = await Role.findById(user.roleId);
+    if (!role) {
+      return res.status(500).json({
+        error: true,
+        message: 'Role not found',
+      });
+    }
+
     // Generate JWT
     const token = await generateJWT(user.id);
 
-    const { id, name, lastName, email: emailUser, roleId } = user;
+    const { id, name, lastName, email: emailUser } = user;
 
     const dataUser = {
       id,
       name,
       lastName,
       email: emailUser,
-      roleId,
+      role: role.name,
       token: token,
     };
 
