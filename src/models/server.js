@@ -12,7 +12,9 @@ class Server {
     this.server = require('http').createServer(this.app);
 
     //Paths
-    this.paths = {};
+    this.paths = {
+      auth: '/api/auth',
+    };
 
     // Connect to database
     this.dbConnection();
@@ -53,7 +55,9 @@ class Server {
     this.app.use(cors());
   }
 
-  routes() {}
+  routes() {
+    this.app.use(this.paths.auth, require('../routes/authRoutes'));
+  }
 
   listen() {
     this.server.listen(this.port, () => {
