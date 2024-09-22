@@ -7,11 +7,11 @@ const getStudentGradesAndRestrictions = async (req = request, res = response) =>
   try {
     const { search } = req.query;
 
-    // Get user requested by query by id
+    // Get the user making the request
     const user = await User.findById(req.user.id);
-
-    // Verify if user is admin or teacher
     const userRole = await Role.findById(user.roleId);
+
+    // Check permissions for ADMIN or TEACHER
     if (userRole.name !== 'ADMIN' && userRole.name !== 'TEACHER') {
       return res.status(403).json({
         success: false,
@@ -19,18 +19,19 @@ const getStudentGradesAndRestrictions = async (req = request, res = response) =>
       });
     }
 
-    // Get only users with student role
+    // Find the STUDENT role
     const studentRole = await Role.findOne({ name: 'STUDENT' });
 
+    // Find students by ID or full name
     const students = await User.find({
       roleId: studentRole._id,
       $or: [
-        // Search students by id or full name
         { _id: { $regex: `^${search}`, $options: 'i' } },
         { fullName: { $regex: `^${search}`, $options: 'i' } },
       ],
-    }).select('_id fullName email');
+    }).select('_id name lastName fullName email');
 
+    // Verify if any students exists
     if (students.length === 0) {
       return res.status(404).json({
         success: false,
@@ -38,18 +39,20 @@ const getStudentGradesAndRestrictions = async (req = request, res = response) =>
       });
     }
 
-    // Get student grades and restrictions
+    // Get grades and restrictions for each student
     const studentData = await Promise.all(
       students.map(async (student) => {
         const [grades, restrictions] = await Promise.all([
           Grade.find({ studentId: student._id }).select('id subjectName gradeName grade comment'),
-          Restriction.find({ studentId: student._id }).select('id reason studentId createdAt'),
+          Restriction.find({ studentId: student._id }).select('id reason createdAt'),
         ]);
 
         return {
           student: {
             _id: student._id,
             fullName: student.fullName,
+            name: student.name,
+            lastName: student.lastName,
             email: student.email,
             grades,
             restrictions,
@@ -58,6 +61,7 @@ const getStudentGradesAndRestrictions = async (req = request, res = response) =>
       })
     );
 
+    // Return student data
     return res.status(200).json({
       success: true,
       data: studentData,
@@ -74,11 +78,11 @@ const getStudentByRestrictionOrReason = async (req = request, res = response) =>
   try {
     const { search } = req.query;
 
-    // Get user requested by query by id
+    // Get the user making the request
     const user = await User.findById(req.user.id);
-
-    // Verify if user is admin or teacher
     const userRole = await Role.findById(user.roleId);
+
+    // Check permissions for ADMIN or TEACHER
     if (userRole.name !== 'ADMIN' && userRole.name !== 'TEACHER') {
       return res.status(403).json({
         success: false,
@@ -86,14 +90,15 @@ const getStudentByRestrictionOrReason = async (req = request, res = response) =>
       });
     }
 
-    // Search restrictions by id or reason
+    // Search for restrictions by ID or reason
     const restrictions = await Restriction.find({
       $or: [
-        { _id: { $regex: `^${search}`, $options: 'i' } },
-        { reason: { $regex: `^${search}`, $options: 'i' } },
+        { _id: { $regex: `${search}`, $options: 'i' } },
+        { reason: { $regex: `${search}`, $options: 'i' } },
       ],
-    }).select('id reason studentId');
+    }).select('id studentId reason createdAt');
 
+    // Verify if any restrictions exists
     if (restrictions.length === 0) {
       return res.status(404).json({
         success: false,
@@ -101,14 +106,21 @@ const getStudentByRestrictionOrReason = async (req = request, res = response) =>
       });
     }
 
-    // Get students associated with these restrictions
+    // Get student ID
     const studentIds = restrictions.map((restriction) => restriction.studentId);
+
+    // Find the STUDENT role
+    const studentRole = await Role.findOne({ name: 'STUDENT' });
+
+    // Find students associated with restrictions
     const students = await User.find({
       _id: { $in: studentIds },
-    }).select('_id fullName email');
+      roleId: studentRole._id,
+    }).select('_id fullName name lastName email');
 
     // Combine students with their restrictions
     const studentData = students.map((student) => {
+      // Filter restrictions by student ID
       const studentRestrictions = restrictions.filter(
         (restriction) => restriction.studentId === student._id
       );
@@ -116,12 +128,15 @@ const getStudentByRestrictionOrReason = async (req = request, res = response) =>
         student: {
           _id: student._id,
           fullName: student.fullName,
+          name: student.name,
+          lastName: student.lastName,
           email: student.email,
           restrictions: studentRestrictions,
         },
       };
     });
 
+    // Return student data
     return res.status(200).json({
       success: true,
       data: studentData,
