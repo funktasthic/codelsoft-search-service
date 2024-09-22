@@ -3,7 +3,7 @@ const salt = bcryptjs.genSaltSync();
 
 const users = [
   {
-    _id: 'b66e6db1-2d93-4e83-aea6-7e234a004c70',
+    _id: 'a66e6db1-2d93-4e83-aea6-7e234a004c70',
     name: 'Carlos',
     lastName: 'Gómez',
     fullName: 'Carlos Gómez',

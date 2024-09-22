@@ -149,7 +149,86 @@ const getStudentByRestrictionOrReason = async (req = request, res = response) =>
   }
 };
 
+const getStudentsByGradeRange = async (req = request, res = response) => {
+  try {
+    const { minGrade, maxGrade } = req.query; // Get min and max grade from query
+
+    // Get the user making the request
+    const user = await User.findById(req.user.id);
+    const userRole = await Role.findById(user.roleId); // Get user role
+
+    // Check if the user has the required permissions (ADMIN or TEACHER)
+    if (userRole.name !== 'ADMIN' && userRole.name !== 'TEACHER') {
+      return res.status(403).json({
+        success: false,
+        message: 'Insufficient permissions',
+      });
+    }
+
+    // Build query to filter grades within the range
+    const gradeQuery = {};
+    if (minGrade) {
+      gradeQuery.grade = { $gte: parseFloat(minGrade) }; // Minimum grade
+    }
+    if (maxGrade) {
+      gradeQuery.grade = { ...gradeQuery.grade, $lte: parseFloat(maxGrade) }; // Maximum grade
+    }
+
+    // Find grades that match the query and populate the related student data
+    const grades = await Grade.find(gradeQuery).populate(
+      'studentId',
+      '_id fullName name lastName email'
+    );
+
+    // If no grades found, return 404
+    if (grades.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'No students found with the specified grade range',
+      });
+    }
+
+    // Group results by student, only including the grades that match the range
+    const studentData = grades.reduce((acc, grade) => {
+      // If the student is already in the accumulator, add the new grade
+      if (!acc[grade.studentId._id]) {
+        acc[grade.studentId._id] = {
+          _id: grade.studentId._id,
+          fullName: grade.studentId.fullName,
+          name: grade.studentId.name,
+          lastName: grade.studentId.lastName,
+          email: grade.studentId.email,
+          grades: [],
+        };
+      }
+
+      // Add the grade that is in the range
+      acc[grade.studentId._id].grades.push({
+        id: grade._id,
+        subjectName: grade.subjectName,
+        gradeName: grade.gradeName,
+        grade: grade.grade,
+        comment: grade.comment,
+      });
+
+      return acc;
+    }, {});
+
+    return res.status(200).json({
+      success: true,
+      data: Object.values(studentData), // Convert student data to an array for the response
+    });
+  } catch (error) {
+    // Return error message if something goes wrong
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   getStudentGradesAndRestrictions,
   getStudentByRestrictionOrReason,
+  getStudentsByGradeRange,
 };

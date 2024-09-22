@@ -2,7 +2,7 @@ const restrictions = [
   {
     _id: 'a12a7ef4-b4e3-4b3a-9584-0d63723614c5',
     reason: 'Falta de asistencia',
-    studentId: 'b66e6db1-2d93-4e83-aea6-7e234a004c70',
+    studentId: 'a66e6db1-2d93-4e83-aea6-7e234a004c70',
   },
   {
     _id: 'b7e0a45b-0f1d-4b2d-9b56-8b6394ef7b0e',
