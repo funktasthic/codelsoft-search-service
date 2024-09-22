@@ -5,16 +5,10 @@ const Restriction = require('../models/restriction.model');
 
 const getStudentGradesAndRestrictions = async (req = request, res = response) => {
   try {
-    const { studentId } = req.params;
+    const { search } = req.query;
 
-    // Verify if user exists
-    const user = await User.findById(req.user._id);
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        message: 'User not found',
-      });
-    }
+    // Get user requested by query by id
+    const user = await User.findById(req.user.id);
 
     // Verify if user is admin or teacher
     const userRole = await Role.findById(user.roleId);
@@ -25,34 +19,52 @@ const getStudentGradesAndRestrictions = async (req = request, res = response) =>
       });
     }
 
-    const student = await User.findById(studentId);
-    if (!student) {
+    // Get only users with student role
+    const studentRole = await Role.findOne({ name: 'STUDENT' });
+
+    const students = await User.find({
+      roleId: studentRole._id,
+      $or: [
+        // Use regex for uuid
+        { _id: { $regex: search, $options: 'i' } },
+        // Use regex for fullName
+        { fullName: { $regex: search, $options: 'i' } },
+      ],
+    }).select('_id fullName email');
+
+    if (students.length === 0) {
       return res.status(404).json({
         success: false,
-        message: 'Student not found',
+        message: 'No students found',
       });
     }
 
     // Get student grades and restrictions
-    const [grades, restrictions] = await Promise.all([
-      Grade.find({ studentId: studentId }).select('id subjectName gradeName grade comment'),
-      Restriction.find({ studentId: studentId }).select('id reason studentId createdAt'),
-    ]);
+    const studentData = await Promise.all(
+      students.map(async (student) => {
+        const [grades, restrictions] = await Promise.all([
+          Grade.find({ studentId: student._id }).select('id subjectName gradeName grade comment'),
+          Restriction.find({ studentId: student._id }).select('id reason studentId createdAt'),
+        ]);
+
+        return {
+          student: {
+            _id: student._id,
+            fullName: student.fullName,
+            email: student.email,
+            grades,
+            restrictions,
+          },
+        };
+      })
+    );
 
     return res.status(200).json({
       success: true,
-      data: {
-        student: {
-          _id: student._id,
-          name: student.name,
-          lastName: student.lastName,
-          email: student.email,
-          grades: grades,
-          restrictions: restrictions,
-        },
-      },
+      data: studentData,
     });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       success: false,
       message: error.message,

@@ -9,6 +9,6 @@ const { getStudentGradesAndRestrictions } = require('../controllers/searchContro
 const router = Router();
 
 // Search student grades and restrictions
-router.get('/student/:studentId', [validateJWT], getStudentGradesAndRestrictions);
+router.get('/student', [validateJWT], getStudentGradesAndRestrictions);
 
 module.exports = router;
