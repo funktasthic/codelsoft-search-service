@@ -151,13 +151,13 @@ const getStudentByRestrictionOrReason = async (req = request, res = response) =>
 
 const getStudentsByGradeRange = async (req = request, res = response) => {
   try {
-    const { minGrade, maxGrade } = req.query; // Get min and max grade from query
+    const { minGrade, maxGrade } = req.query;
 
     // Get the user making the request
     const user = await User.findById(req.user.id);
-    const userRole = await Role.findById(user.roleId); // Get user role
+    const userRole = await Role.findById(user.roleId);
 
-    // Check if the user has the required permissions (ADMIN or TEACHER)
+    // Check permissions for ADMIN or TEACHER
     if (userRole.name !== 'ADMIN' && userRole.name !== 'TEACHER') {
       return res.status(403).json({
         success: false,
@@ -165,22 +165,21 @@ const getStudentsByGradeRange = async (req = request, res = response) => {
       });
     }
 
-    // Build query to filter grades within the range
+    // Search for students by grade range
     const gradeQuery = {};
     if (minGrade) {
-      gradeQuery.grade = { $gte: parseFloat(minGrade) }; // Minimum grade
+      gradeQuery.grade = { $gte: parseFloat(minGrade) };
     }
     if (maxGrade) {
-      gradeQuery.grade = { ...gradeQuery.grade, $lte: parseFloat(maxGrade) }; // Maximum grade
+      gradeQuery.grade = { ...gradeQuery.grade, $lte: parseFloat(maxGrade) };
     }
 
-    // Find grades that match the query and populate the related student data
+    // Find students with the specified grade range
     const grades = await Grade.find(gradeQuery).populate(
       'studentId',
       '_id fullName name lastName email'
     );
 
-    // If no grades found, return 404
     if (grades.length === 0) {
       return res.status(404).json({
         success: false,
@@ -190,7 +189,6 @@ const getStudentsByGradeRange = async (req = request, res = response) => {
 
     // Group results by student, only including the grades that match the range
     const studentData = grades.reduce((acc, grade) => {
-      // If the student is already in the accumulator, add the new grade
       if (!acc[grade.studentId._id]) {
         acc[grade.studentId._id] = {
           _id: grade.studentId._id,
@@ -214,12 +212,12 @@ const getStudentsByGradeRange = async (req = request, res = response) => {
       return acc;
     }, {});
 
+    // Return student data
     return res.status(200).json({
       success: true,
-      data: Object.values(studentData), // Convert student data to an array for the response
+      data: Object.values(studentData),
     });
   } catch (error) {
-    // Return error message if something goes wrong
     return res.status(500).json({
       success: false,
       message: error.message,

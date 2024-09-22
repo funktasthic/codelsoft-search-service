@@ -6,6 +6,13 @@ const generateJWT = require('../utils/generateJWT');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
+/**
+ * Login user
+ * @function login
+ * @param {Object} req - Request object
+ * @param {Object} res - Response object
+ * @returns {Promise<void>}
+ */
 const login = async (req = request, res = response) => {
   try {
     const { email, password } = req.body;
@@ -67,6 +74,14 @@ const login = async (req = request, res = response) => {
   }
 };
 
+/**
+ * Verify the token in the Authorization header of the request.
+ * If the token is valid, return the user data and the token.
+ * If the token is invalid or expired, return an error message.
+ * @param {Request} req - Request object
+ * @param {Response} res - Response object
+ * @returns {Promise<void>}
+ */
 const validateToken = async (req = request, res = response) => {
   const authHeader = req.headers['authorization'];
 
