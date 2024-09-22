@@ -29,10 +29,16 @@ const seedDatabase = async () => {
     await Grade.insertMany(gradeData);
     await Restriction.insertMany(restrictionData);
 
-    console.log('DATA SEEDING SUCCESS');
+    console.log(
+      '\x1b[33m--------------------\n\x1b[1mDATABASE SEEDED!\n--------------------\x1b[0m'
+    );
     process.exit(0);
   } catch (error) {
-    console.error('DATA SEEDING ERROR:', error);
+    console.log(
+      '\x1b[31m-------------------\n\x1b[1mDATABASE ERROR: ',
+      error,
+      '\n-------------------\x1b[0m'
+    );
     process.exit(1);
   }
 };

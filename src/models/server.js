@@ -34,11 +34,11 @@ class Server {
     try {
       await db();
       console.log(
-        '\x1b[32m-----------------------\nDATABASE CONNECTED! ✅\n-----------------------\x1b[0m'
+        '\x1b[32m-----------------------\n\x1b[1mDATABASE CONNECTED! ✅\n-----------------------\x1b[0m'
       );
     } catch (error) {
       console.log(
-        '\x1b[31m-------------------\nDATABASE ERROR: ',
+        '\x1b[31m-------------------\n\x1b[1mDATABASE ERROR: ',
         error,
         '\n-------------------\x1b[0m'
       );
@@ -64,7 +64,7 @@ class Server {
   listen() {
     this.server.listen(this.port, () => {
       console.log(
-        `\x1b[34m--------------------------------------------\nSERVER RUNNING IN \x1b[35m${env.toUpperCase()}\x1b[34m, ON PORT: ${this.port}\n--------------------------------------------\x1b[0m`
+        `\x1b[34m----------------------------\nSERVER RUNNING ON PORT: \x1b[1m${this.port}\n----------------------------\x1b[0m`
       );
     });
   }
