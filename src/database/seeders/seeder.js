@@ -12,7 +12,7 @@ const roleData = require('./data/roles.data');
 
 const seedDatabase = async () => {
   try {
-    // Connect to MongoDB
+    // Conectar a MongoDB
     await mongoose.connect(config.MONGODB_URI);
 
     // Get the list of all collections
