@@ -1,6 +1,6 @@
 # Codelsoft - Search Service
 
-Este proyecto es una aplicación para la gestión de estudiantes, calificaciones y restricciones en universidades chilenas. Desarrollado como un monolito con influencias de arquitectura SOA, está construido con Node.js, Express.js, MongoDB, y MongoDB Atlas en producción.
+Este proyecto es una aplicación para la gestión de estudiantes, calificaciones y restricciones en universidades chilenas. Desarrollado como un monolito con influencias de arquitectura SOA, está construido con Node.js, Express.js y MongoDB Atlas.
 
 ![Logo](https://i.imgur.com/7R9KWRA.png)
 
@@ -8,7 +8,6 @@ Este proyecto es una aplicación para la gestión de estudiantes, calificaciones
 
 - Node.js v20.16.0
 - Express.js
-- MongoDB
 - MongoDB Atlas
 - Mongoose
 
@@ -16,9 +15,7 @@ Este proyecto es una aplicación para la gestión de estudiantes, calificaciones
 
 - [Node](https://nodejs.org/en/download/current)
 - [Nodemon](https://www.npmjs.com/package/nodemon)
-- Puerto de MongoDB = 27017 (configura según corresponda para otros entornos)
 - Puerto del servidor = 3000
-- Crear una base de datos llamada codelsoft
 
 ## Instalación
 
@@ -38,7 +35,7 @@ git branch -a
 git checkout [nombre de tu rama]
 ```
 
-3. Copia el archivo .env.example y configura el archivo .env con la información necesaria según el entorno que utilices:
+3. Copia el archivo .env.example y configura el archivo .env con las variables de entorno a utilizar:
 
 ```bash
 copy .env.example .env
@@ -57,19 +54,7 @@ npm i -g nodemon
 npm i
 ```
 
-6. Ejecutar el proyecto según el entorno que utilice:
-
-- Desarrollo:
-
-```bash
-npm run dev
-```
-
-- Pruebas:
-
-```bash
-npm run test
-```
+6. Ejecutar el servicio:
 
 - Producción:
 
