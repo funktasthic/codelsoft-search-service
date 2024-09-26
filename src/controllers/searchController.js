@@ -3,6 +3,14 @@ const Role = require('../models/role.model');
 const Grade = require('../models/grade.model');
 const Restriction = require('../models/restriction.model');
 
+/**
+ * Search student grades and restrictions by student ID or full name
+ * @function getStudentGradesAndRestrictions
+ * @param {Object} req - Request object
+ * @param {Object} res - Response object
+ * @param {string} req.query.search - Search value
+ * @returns {Promise<void>}
+ */
 const getStudentGradesAndRestrictions = async (req = request, res = response) => {
   try {
     const { search } = req.query;
@@ -74,6 +82,14 @@ const getStudentGradesAndRestrictions = async (req = request, res = response) =>
   }
 };
 
+/**
+ * Search student by restriction ID or reason
+ * @function getStudentByRestrictionOrReason
+ * @param {Object} req - Request object
+ * @param {Object} res - Response object
+ * @param {string} req.query.search - Search value
+ * @returns {Promise<void>}
+ */
 const getStudentByRestrictionOrReason = async (req = request, res = response) => {
   try {
     const { search } = req.query;
@@ -149,6 +165,15 @@ const getStudentByRestrictionOrReason = async (req = request, res = response) =>
   }
 };
 
+/**
+ * Search students by grade range
+ * @function getStudentsByGradeRange
+ * @param {Object} req - Request object
+ * @param {Object} res - Response object
+ * @param {string} req.query.minGrade - Minimum grade
+ * @param {string} req.query.maxGrade - Maximum grade
+ * @returns {Promise<void>}
+ */
 const getStudentsByGradeRange = async (req = request, res = response) => {
   try {
     const { minGrade, maxGrade } = req.query;

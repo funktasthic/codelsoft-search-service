@@ -136,6 +136,14 @@ const validateToken = async (req = request, res = response) => {
   }
 };
 
+/**
+ * Register a new user
+ * @function register
+ * @param {Object} req - Request object
+ * @param {Object} res - Response object
+ * @returns {Promise<void>}
+ */
+
 const register = async (req = request, res = response) => {
   try {
     const { name, lastName, email, password, phone, roleName } = req.body;
@@ -183,6 +191,9 @@ const register = async (req = request, res = response) => {
     // Save the user in DB
     await user.save();
 
+    // Generate JWT
+    const token = await generateJWT(user.id);
+
     const dataUser = {
       id: user.id,
       name: user.name,
@@ -192,6 +203,7 @@ const register = async (req = request, res = response) => {
       phone: user.phone,
       password: user.password,
       roleId: user.roleId,
+      token: token,
     };
 
     return res.status(201).json({

@@ -10,6 +10,14 @@ const restrictionData = require('./data/restrictions.data');
 const userData = require('./data/users.data');
 const roleData = require('./data/roles.data');
 
+/**
+ * Seeds the database with the given data.
+ *
+ * @function
+ * @async
+ * @returns {undefined}
+ * @throws {Error} If there is an error seeding the database.
+ */
 const seedDatabase = async () => {
   try {
     // Conectar a MongoDB

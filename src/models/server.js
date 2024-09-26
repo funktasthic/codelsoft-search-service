@@ -3,9 +3,16 @@ const cors = require('cors');
 const logger = require('morgan');
 const db = require('../database/connection');
 const config = require('../database/config/config');
-const env = process.env.NODE_ENV;
 
 class Server {
+  /**
+   * Constructor for the Server class.
+   *
+   * This constructor will set up the express app, assign the port, and create the server.
+   * Also, it will connect to the database, use JSON, and execute the middlewares and routes functions.
+   *
+   * @memberof Server
+   */
   constructor() {
     this.app = express();
     this.port = config.PORT;
