@@ -10,6 +10,7 @@ const { validationResult } = require('express-validator');
  * @returns {Promise<void>}
  */
 const validateFields = (req, res = response, next) => {
+  // Check for errors
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     errors.array().map((error) => error.msg);

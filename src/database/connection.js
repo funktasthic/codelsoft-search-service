@@ -10,6 +10,7 @@ const config = require('./config/config');
  */
 const connectDB = async () => {
   try {
+    // Connect to MongoDB
     await mongoose.connect(config.MONGODB_URI);
   } catch (err) {
     console.log(err);

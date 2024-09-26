@@ -14,8 +14,8 @@ const User = require('../models/user.model');
  * @returns {Promise<void>}
  */
 const validateJWT = async (req, res = response, next) => {
+  // Get the token from the Authorization header
   const authHeader = req.headers['authorization'];
-
   token = authHeader && authHeader.split(' ')[1];
 
   if (!token) {
@@ -27,8 +27,10 @@ const validateJWT = async (req, res = response, next) => {
   }
 
   try {
+    // Verify the token
     const { id } = jwt.verify(token, process.env.JWT_SECRET);
 
+    // Verify if the user exists
     const user = await User.findById(id);
 
     if (!user) {
@@ -42,6 +44,7 @@ const validateJWT = async (req, res = response, next) => {
     req.user = user;
     next();
   } catch (error) {
+    // If the token is expired, return an error
     if (error.name === 'TokenExpiredError') {
       return res.status(401).json({
         success: false,
@@ -49,6 +52,8 @@ const validateJWT = async (req, res = response, next) => {
         message: 'Expired token',
       });
     }
+
+    // If the token is invalid, return an error
     return res.status(401).json({
       success: false,
       error: true,

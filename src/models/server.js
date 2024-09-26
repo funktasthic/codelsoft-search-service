@@ -18,7 +18,7 @@ class Server {
     this.port = config.PORT;
     this.server = require('http').createServer(this.app);
 
-    //Paths
+    // Paths
     this.paths = {
       auth: '/api/auth',
       search: '/api/search',
@@ -69,6 +69,7 @@ class Server {
   }
 
   listen() {
+    // Listen to the server
     this.server.listen(this.port, () => {
       console.log(
         `\x1b[34m----------------------------\nSERVER RUNNING ON PORT: \x1b[1m${this.port}\n----------------------------\x1b[0m`
