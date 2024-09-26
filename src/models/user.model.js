@@ -7,6 +7,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: uuidv4,
     },
+    fullName: {
+      type: String,
+      required: true,
+    },
     name: {
       type: String,
       required: true,
@@ -22,7 +26,9 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true,
+      required: function () {
+        return this.role && this.role.name !== 'STUDENT';
+      },
     },
     roleId: {
       type: String,
@@ -37,5 +43,10 @@ const userSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+userSchema.pre('save', function (next) {
+  this.fullName = `${this.name} ${this.lastName}`;
+  next();
+});
 
 module.exports = mongoose.model('User', userSchema);

@@ -1,18 +1,37 @@
+const swaggerUi = require('swagger-ui-express');
+const swaggerJsdoc = require('swagger-jsdoc');
 const express = require('express');
-const cors = require('cors');
 const logger = require('morgan');
+const cors = require('cors');
 const db = require('../database/connection');
 const config = require('../database/config/config');
-const env = process.env.NODE_ENV;
 
 class Server {
+  /**
+   * Constructor of the Server class.
+   *
+   * This constructor is responsible to:
+   * - Create an Express app
+   * - Set the port
+   * - Create an HTTP server
+   * - Set the paths (auth, search, docs)
+   * - Connect to the database
+   * - Use Express.json() to parse JSON requests
+   * - Set up the middlewares
+   * - Set up the routes
+   * - Set up the Swagger documentation
+   */
   constructor() {
     this.app = express();
     this.port = config.PORT;
     this.server = require('http').createServer(this.app);
 
-    //Paths
-    this.paths = {};
+    // Paths
+    this.paths = {
+      auth: '/api/auth',
+      search: '/api/search',
+      docs: '/api/docs',
+    };
 
     // Connect to database
     this.dbConnection();
@@ -25,21 +44,9 @@ class Server {
 
     // Routes
     this.routes();
-  }
 
-  async dbConnection() {
-    try {
-      await db();
-      console.log(
-        '\x1b[32m-----------------------\nDATABASE CONNECTED! ✅\n-----------------------\x1b[0m'
-      );
-    } catch (error) {
-      console.log(
-        '\x1b[31m-------------------\nDATABASE ERROR: ',
-        error,
-        '\n-------------------\x1b[0m'
-      );
-    }
+    // Swagger Docs
+    this.setupSwagger();
   }
 
   middlewares() {
@@ -53,13 +60,59 @@ class Server {
     this.app.use(cors());
   }
 
-  routes() {}
+  routes() {
+    this.app.use(this.paths.auth, require('../routes/authRoutes'));
+    this.app.use(this.paths.search, require('../routes/searchRoutes'));
+  }
+
+  async dbConnection() {
+    try {
+      await db();
+      console.log(
+        '\x1b[32m-----------------------\n\x1b[1mDATABASE CONNECTED! ✅\n-----------------------\x1b[0m'
+      );
+    } catch (error) {
+      console.log(
+        '\x1b[31m-------------------\n\x1b[1mDATABASE ERROR: ',
+        error,
+        '\n-------------------\x1b[0m'
+      );
+    }
+  }
+
+  setupSwagger() {
+    const options = {
+      definition: {
+        openapi: '3.0.0',
+        info: {
+          title: 'Codelsoft Search Service API',
+          version: '1.0.0',
+          description: 'API documentation for the Codelsoft Search Service',
+        },
+        servers: [
+          {
+            url: `http://localhost:${this.port}`,
+          },
+        ],
+      },
+      apis: ['./src/routes/*.js', './src/models/*.js'],
+    };
+
+    const swaggerSpec = swaggerJsdoc(options);
+    this.app.use(this.paths.docs, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+  }
+
+  async openSwagger() {
+    const module = await import('open');
+    await module.default(`http://localhost:${this.port}/api/docs`);
+  }
 
   listen() {
-    this.server.listen(this.port, () => {
+    this.server.listen(this.port, async () => {
       console.log(
-        `\x1b[34m--------------------------------------------\nSERVER RUNNING IN \x1b[35m${env.toUpperCase()}\x1b[34m, ON PORT: ${this.port}\n--------------------------------------------\x1b[0m`
+        `\x1b[34m----------------------------\nSERVER RUNNING ON PORT: \x1b[1m${this.port}\n----------------------------\x1b[0m`
       );
+      await this.openSwagger();
     });
   }
 }

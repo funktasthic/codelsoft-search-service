@@ -1,0 +1,1710 @@
+{
+	"info": {
+		"_postman_id": "edd5e403-5a28-49ea-a907-202cd97c8a53",
+		"name": "codelsoft",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29974575"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Verify Token",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/auth/verify-token",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"verify-token"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Valid Token",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/auth/verify-token",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"verify-token"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "414"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"19e-bkfEy628acLhygZI7Um5bX1K2TQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 26 Sep 2024 02:25:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Token valid\",\n    \"data\": {\n        \"id\": \"d4d3c7ef-d908-4a82-bc2d-9c4461c5b0aa\",\n        \"name\": \"Jorge\",\n        \"lastName\": \"Martínez\",\n        \"email\": \"jorge.martinez@example.com\",\n        \"roleId\": \"fca2f5bb-249d-4e5a-bb69-1d938872f07f\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ0ZDNjN2VmLWQ5MDgtNGE4Mi1iYzJkLTljNDQ2MWM1YjBhYSIsImlhdCI6MTcyNzMxNzQ2MywiZXhwIjoxNzI3MzUzNDYzfQ.V541IIz7gPAbG8wjrlPmWeqNRpPWIlWTLbIw7pTxGzw\"\n    }\n}"
+						},
+						{
+							"name": "Token Invalid",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/auth/verify-token",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"verify-token"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "106"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"6a-wFHhKRu+SqRzkLj7x0fbHSMMbbQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 26 Sep 2024 02:26:21 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Token invalid\",\n    \"error\": {\n        \"name\": \"JsonWebTokenError\",\n        \"message\": \"jwt malformed\"\n    }\n}"
+						},
+						{
+							"name": "No Token Provided",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/auth/verify-token",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"verify-token"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2f-VwoH6g/NSC3v0iJZlTnsI5fj3wE\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 26 Sep 2024 02:28:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"No token provided\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Register any User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"token\", data.data.token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Renato\",\r\n    \"lastName\": \"Morales\",\r\n    \"email\": \"renato.morales@alumnos.ucn.cl\",\r\n    \"password\": \"password123\",\r\n    \"phone\": \"+56952186687\",\r\n    \"roleName\": \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/auth/register",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Registration",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Jane\",\r\n  \"lastName\": \"Smith\",\r\n  \"email\": \"jane.smith@example.com\",\r\n  \"password\": \"password123\",\r\n  \"phone\": \"123456789\",\r\n  \"roleName\": \"STUDENT\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/auth/register",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "517"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"205-2QS/u50ACVIa+yy4wVRR3vPeucA\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 26 Sep 2024 02:21:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"e32bd1e6-b8b5-4da0-92d1-76855e4dfe44\",\n        \"name\": \"Jane\",\n        \"lastName\": \"Smith\",\n        \"fullName\": \"Jane Smith\",\n        \"email\": \"jane.smith@example.com\",\n        \"password\": \"$2a$10$z8GJNhen4Tx/OpNw6o1USOwdws9oYtnUFtDl2TVyM9EOcUiqx.Ste\",\n        \"roleId\": \"fca2f5bb-249d-4e5a-bb69-1d938872f07f\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImUzMmJkMWU2LWI4YjUtNGRhMC05MmQxLTc2ODU1ZTRkZmU0NCIsImlhdCI6MTcyNzMxNzI5MywiZXhwIjoxNzI3MzUzMjkzfQ.KEj2zE1eoK5KbUHKzqQTMiT4PHsNjjlnMX_RVs-DUIs\"\n    },\n    \"message\": \"User created successfully\"\n}"
+						},
+						{
+							"name": "User Already Exists",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Ignacio\",\r\n    \"lastName\": \"Avendaño\",\r\n    \"email\": \"ignacio.avendano@alumnos.ucn.cl\",\r\n    \"password\": \"password123\",\r\n    \"phone\": \"+56952186687\",\r\n    \"roleName\": \"ADMIN\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/auth/register",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "76"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4c-qdwNFjctVGopPV5S3H8eraPjVC8\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 26 Sep 2024 02:22:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"User already exists in the system\",\n    \"error\": true\n}"
+						},
+						{
+							"name": "Role Not Found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Ernes\",\r\n    \"lastName\": \"Fuenzalida\",\r\n    \"email\": \"ernes.fuenzalida@alumnos.ucn.cl\",\r\n    \"password\": \"password123\",\r\n    \"phone\": \"+56952186687\",\r\n    \"roleName\": \"UNKNOWN_ROLE\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/auth/register",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "57"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"39-N8ho37BIBIh9gTyJwcPVQ6lRMus\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 26 Sep 2024 02:23:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Role not found\",\n    \"error\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "Login Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"token\", data.data.token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"ignacio.avendano@alumnos.ucn.cl\",\r\n    \"password\": \"admin123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"ignacio.avendano@alumnos.ucn.cl\",\r\n  \"password\": \"admin123\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/auth/login",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "395"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"18b-bDMKKzeegvXmor4LHIbs7Po25yc\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 26 Sep 2024 02:15:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"d4fc4c2d-e9b1-4d6e-96a4-9f95a2f773f7\",\n        \"name\": \"Ignacio\",\n        \"lastName\": \"Avendaño\",\n        \"email\": \"ignacio.avendano@alumnos.ucn.cl\",\n        \"role\": \"ADMIN\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ0ZmM0YzJkLWU5YjEtNGQ2ZS05NmE0LTlmOTVhMmY3NzNmNyIsImlhdCI6MTcyNzMxNjk0OCwiZXhwIjoxNzI3MzUyOTQ4fQ.hZfxplumwnST6TJbmMgqAikAK4VffUspIa0Pj1D1FTo\"\n    },\n    \"message\": \"Login successfully\"\n}"
+						},
+						{
+							"name": "Invalid Credentials",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"student@example.com\",\r\n  \"password\": \"wrongPassword\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/auth/login",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2e-2oexAPzzrUgLGYhuWdtm64eEqTY\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 26 Sep 2024 02:16:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": true,\n    \"message\": \"Invalid credentials\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Login Teacher",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"token\", data.data.token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"pedro.ruiz@example.com\",\r\n    \"password\": \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"pedro.ruiz@example.com\",\r\n    \"password\": \"password123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/auth/login",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "381"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"17d-9TBZfMC4tq5Fj3dCjB7DIxDwjrE\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 26 Sep 2024 02:20:29 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"f5fbd7d6-7e61-4a80-b174-3b8a77d45714\",\n        \"name\": \"Pedro\",\n        \"lastName\": \"Ruiz\",\n        \"email\": \"pedro.ruiz@example.com\",\n        \"role\": \"TEACHER\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY1ZmJkN2Q2LTdlNjEtNGE4MC1iMTc0LTNiOGE3N2Q0NTcxNCIsImlhdCI6MTcyNzMxNzIyOSwiZXhwIjoxNzI3MzUzMjI5fQ.EmsfU6dlPCgajrzO4p62h7jt_HfCwMhE-ykrmtk2PdE\"\n    },\n    \"message\": \"Login successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Login Student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"token\", data.data.token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"jorge.martinez@example.com\",\r\n    \"password\": \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"jorge.martinez@example.com\",\r\n    \"password\": \"password123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/api/auth/login",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "390"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"186-lEjMhRoB4+7KsZoOwvj/CtGamAQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 26 Sep 2024 02:21:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"d4d3c7ef-d908-4a82-bc2d-9c4461c5b0aa\",\n        \"name\": \"Jorge\",\n        \"lastName\": \"Martínez\",\n        \"email\": \"jorge.martinez@example.com\",\n        \"role\": \"STUDENT\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ0ZDNjN2VmLWQ5MDgtNGE4Mi1iYzJkLTljNDQ2MWM1YjBhYSIsImlhdCI6MTcyNzMxNzI2NiwiZXhwIjoxNzI3MzUzMjY2fQ.FfgbLDog3Wzz6lU8zWGn-5y-JnhTGRlqo9akvb66qTk\"\n    },\n    \"message\": \"Login successfully\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Search",
+			"item": [
+				{
+					"name": "Get Student grades and restrictions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/search/student?search=a1d42e38-1b76-4930-bd04-2a38f230058e",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"search",
+								"student"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "a1d42e38-1b76-4930-bd04-2a38f230058e"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Search by Student Name",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/search/student?search=car",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"search",
+										"student"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "car"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2475"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9ab-1KU1zpvbCNmqWzHzB/4xLb+jxmA\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 26 Sep 2024 02:32:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"student\": {\n                \"_id\": \"a66e6db1-2d93-4e83-aea6-7e234a004c70\",\n                \"fullName\": \"Carlos Gómez\",\n                \"name\": \"Carlos\",\n                \"lastName\": \"Gómez\",\n                \"email\": \"carlos.gomez@example.com\",\n                \"grades\": [\n                    {\n                        \"_id\": \"a91c4eae-36b7-4f5e-bfc0-6c6e0f5d3f5c\",\n                        \"subjectName\": \"Física\",\n                        \"gradeName\": \"Examen Final\",\n                        \"grade\": 6.2,\n                        \"comment\": \"Gran progreso, especialmente en los conceptos de dinámica.\"\n                    },\n                    {\n                        \"_id\": \"f2b7e4b9-8d94-4a93-b6e5-6e6d887e4d1e\",\n                        \"subjectName\": \"Biología\",\n                        \"gradeName\": \"Examen Parcial\",\n                        \"grade\": 4.2,\n                        \"comment\": \"Requiere más práctica en los conceptos de biología celular.\"\n                    },\n                    {\n                        \"_id\": \"e41d9ef2-3bf2-47d6-9b4e-6dc9f7a888b1\",\n                        \"subjectName\": \"Matemáticas\",\n                        \"gradeName\": \"Prueba de Álgebra\",\n                        \"grade\": 3.8,\n                        \"comment\": \"Dificultades con ecuaciones lineales.\"\n                    },\n                    {\n                        \"_id\": \"d41b8b9e-5b93-4d8b-8e26-2f5e7d8815aa\",\n                        \"subjectName\": \"Química\",\n                        \"gradeName\": \"Laboratorio\",\n                        \"grade\": 3.5,\n                        \"comment\": \"Se requiere mejorar en la precisión de los resultados.\"\n                    },\n                    {\n                        \"_id\": \"b62f9c22-1b62-4a1d-9b72-b63f4d5f576e\",\n                        \"subjectName\": \"Historia\",\n                        \"gradeName\": \"Prueba de Historia Mundial\",\n                        \"grade\": 6.5,\n                        \"comment\": \"Excelente conocimiento de los eventos históricos.\"\n                    }\n                ],\n                \"restrictions\": [\n                    {\n                        \"_id\": \"a12a7ef4-b4e3-4b3a-9584-0d63723614c5\",\n                        \"reason\": \"Falta de asistencia\",\n                        \"createdAt\": \"2024-09-22T20:26:33.900Z\"\n                    }\n                ]\n            }\n        },\n        {\n            \"student\": {\n                \"_id\": \"a1d42e38-1b76-4930-bd04-2a38f230058e\",\n                \"fullName\": \"Carla Silva\",\n                \"name\": \"Carla\",\n                \"lastName\": \"Silva\",\n                \"email\": \"carla.silva@example.com\",\n                \"grades\": [\n                    {\n                        \"_id\": \"d0b8c4a9-9b7c-49f2-b1b6-0f6a843c4c3f\",\n                        \"subjectName\": \"Inglés\",\n                        \"gradeName\": \"Ensayo\",\n                        \"grade\": 6.8,\n                        \"comment\": \"Excelente análisis literario y uso avanzado del idioma.\"\n                    },\n                    {\n                        \"_id\": \"e19c89e7-cff0-4b9c-b072-08c80b8bba23\",\n                        \"subjectName\": \"Arte\",\n                        \"gradeName\": \"Trabajo en Grupo\",\n                        \"grade\": 5,\n                        \"comment\": \"Trabajo colaborativo efectivo, pero faltó cohesión en la presentación.\"\n                    },\n                    {\n                        \"_id\": \"d7b7d1e4-96e3-434d-8d4a-bf5e3d95b9a8\",\n                        \"subjectName\": \"Música\",\n                        \"gradeName\": \"Participación en Clase\",\n                        \"grade\": 5.5,\n                        \"comment\": \"Muy activa en clase, con contribuciones valiosas a las discusiones.\"\n                    },\n                    {\n                        \"_id\": \"c5b7e2e9-4a09-4230-a40b-5044f3d0d787\",\n                        \"subjectName\": \"Educación Física\",\n                        \"gradeName\": \"Examen\",\n                        \"grade\": 6,\n                        \"comment\": \"Comprensión clara de los temas, buen rendimiento físico.\"\n                    },\n                    {\n                        \"_id\": \"f4b82d0e-7e98-4e0d-a40e-6e5f3e36c0ff\",\n                        \"subjectName\": \"Matemáticas\",\n                        \"gradeName\": \"Examen de Cálculo\",\n                        \"grade\": 3.1,\n                        \"comment\": \"Dificultades con la derivación de funciones.\"\n                    }\n                ],\n                \"restrictions\": [\n                    {\n                        \"_id\": \"e28a1c02-0e7d-42c4-9ff8-958e2f30a165\",\n                        \"reason\": \"Retraso en entrega de proyecto\",\n                        \"createdAt\": \"2024-09-22T20:26:33.900Z\"\n                    }\n                ]\n            }\n        }\n    ]\n}"
+						},
+						{
+							"name": "Insufficient Permissions",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/search/student?search=a1d42e38-1b76-4930-bd04-2a38f230058e",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"search",
+										"student"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "a1d42e38-1b76-4930-bd04-2a38f230058e"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "54"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"36-Z+EXEPd99qxvcyJJV6Z4KlzoOWk\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 26 Sep 2024 02:29:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Insufficient permissions\"\n}"
+						},
+						{
+							"name": "No Students Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/search/student?search=a1d42e38-1b76-4930-bd04-2a38f230058i",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"search",
+										"student"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "a1d42e38-1b76-4930-bd04-2a38f230058i"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2f-xIhYXFC/u2ttka7urS6hBCwPFrg\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 26 Sep 2024 02:30:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"No students found\"\n}"
+						},
+						{
+							"name": "Search by Student UUID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/search/student?search=a1d42e38-1b76-4930-bd04-2a38f230058e",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"search",
+										"student"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "a1d42e38-1b76-4930-bd04-2a38f230058e"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1265"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4f1-altgALT6BpAy9aeECZmLeHKnQdI\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 26 Sep 2024 02:30:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"student\": {\n                \"_id\": \"a1d42e38-1b76-4930-bd04-2a38f230058e\",\n                \"fullName\": \"Carla Silva\",\n                \"name\": \"Carla\",\n                \"lastName\": \"Silva\",\n                \"email\": \"carla.silva@example.com\",\n                \"grades\": [\n                    {\n                        \"_id\": \"d0b8c4a9-9b7c-49f2-b1b6-0f6a843c4c3f\",\n                        \"subjectName\": \"Inglés\",\n                        \"gradeName\": \"Ensayo\",\n                        \"grade\": 6.8,\n                        \"comment\": \"Excelente análisis literario y uso avanzado del idioma.\"\n                    },\n                    {\n                        \"_id\": \"e19c89e7-cff0-4b9c-b072-08c80b8bba23\",\n                        \"subjectName\": \"Arte\",\n                        \"gradeName\": \"Trabajo en Grupo\",\n                        \"grade\": 5,\n                        \"comment\": \"Trabajo colaborativo efectivo, pero faltó cohesión en la presentación.\"\n                    },\n                    {\n                        \"_id\": \"d7b7d1e4-96e3-434d-8d4a-bf5e3d95b9a8\",\n                        \"subjectName\": \"Música\",\n                        \"gradeName\": \"Participación en Clase\",\n                        \"grade\": 5.5,\n                        \"comment\": \"Muy activa en clase, con contribuciones valiosas a las discusiones.\"\n                    },\n                    {\n                        \"_id\": \"c5b7e2e9-4a09-4230-a40b-5044f3d0d787\",\n                        \"subjectName\": \"Educación Física\",\n                        \"gradeName\": \"Examen\",\n                        \"grade\": 6,\n                        \"comment\": \"Comprensión clara de los temas, buen rendimiento físico.\"\n                    },\n                    {\n                        \"_id\": \"f4b82d0e-7e98-4e0d-a40e-6e5f3e36c0ff\",\n                        \"subjectName\": \"Matemáticas\",\n                        \"gradeName\": \"Examen de Cálculo\",\n                        \"grade\": 3.1,\n                        \"comment\": \"Dificultades con la derivación de funciones.\"\n                    }\n                ],\n                \"restrictions\": [\n                    {\n                        \"_id\": \"e28a1c02-0e7d-42c4-9ff8-958e2f30a165\",\n                        \"reason\": \"Retraso en entrega de proyecto\",\n                        \"createdAt\": \"2024-09-22T20:26:33.900Z\"\n                    }\n                ]\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Student by restriction/reason",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/search/restriction?search=falta",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"search",
+								"restriction"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "falta"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Search by Restriction Reason",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/search/restriction?search=falta",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"search",
+										"restriction"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "falta"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "722"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2d2-dXQnCBCCy3stZ2d/e1uMhWcksQc\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 26 Sep 2024 02:31:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"student\": {\n                \"_id\": \"a66e6db1-2d93-4e83-aea6-7e234a004c70\",\n                \"fullName\": \"Carlos Gómez\",\n                \"name\": \"Carlos\",\n                \"lastName\": \"Gómez\",\n                \"email\": \"carlos.gomez@example.com\",\n                \"restrictions\": [\n                    {\n                        \"_id\": \"a12a7ef4-b4e3-4b3a-9584-0d63723614c5\",\n                        \"reason\": \"Falta de asistencia\",\n                        \"studentId\": \"a66e6db1-2d93-4e83-aea6-7e234a004c70\",\n                        \"createdAt\": \"2024-09-22T20:26:33.900Z\"\n                    }\n                ]\n            }\n        },\n        {\n            \"student\": {\n                \"_id\": \"d4d3c7ef-d908-4a82-bc2d-9c4461c5b0aa\",\n                \"fullName\": \"Jorge Martínez\",\n                \"name\": \"Jorge\",\n                \"lastName\": \"Martínez\",\n                \"email\": \"jorge.martinez@example.com\",\n                \"restrictions\": [\n                    {\n                        \"_id\": \"b7e0a45b-0f1d-4b2d-9b56-8b6394ef7b0e\",\n                        \"reason\": \"Falta de entrega de tareas\",\n                        \"studentId\": \"d4d3c7ef-d908-4a82-bc2d-9c4461c5b0aa\",\n                        \"createdAt\": \"2024-09-22T20:26:33.900Z\"\n                    }\n                ]\n            }\n        }\n    ]\n}"
+						},
+						{
+							"name": "No Restrictions Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/search/restriction?search=hkhjkhjk",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"search",
+										"restriction"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "hkhjkhjk"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"33-92rOsVbEuBiD5Q/BDwwP+csE2qo\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 26 Sep 2024 02:38:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"No restrictions found\"\n}"
+						},
+						{
+							"name": "Search by Restriction UUID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/search/restriction?search=a",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"search",
+										"restriction"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "a"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1070"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"42e-wwHvlgWzWbvwXRuU17yJeBysG8I\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 26 Sep 2024 02:39:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"student\": {\n                \"_id\": \"a1d42e38-1b76-4930-bd04-2a38f230058e\",\n                \"fullName\": \"Carla Silva\",\n                \"name\": \"Carla\",\n                \"lastName\": \"Silva\",\n                \"email\": \"carla.silva@example.com\",\n                \"restrictions\": [\n                    {\n                        \"_id\": \"e28a1c02-0e7d-42c4-9ff8-958e2f30a165\",\n                        \"reason\": \"Retraso en entrega de proyecto\",\n                        \"studentId\": \"a1d42e38-1b76-4930-bd04-2a38f230058e\",\n                        \"createdAt\": \"2024-09-22T20:26:33.900Z\"\n                    }\n                ]\n            }\n        },\n        {\n            \"student\": {\n                \"_id\": \"a66e6db1-2d93-4e83-aea6-7e234a004c70\",\n                \"fullName\": \"Carlos Gómez\",\n                \"name\": \"Carlos\",\n                \"lastName\": \"Gómez\",\n                \"email\": \"carlos.gomez@example.com\",\n                \"restrictions\": [\n                    {\n                        \"_id\": \"a12a7ef4-b4e3-4b3a-9584-0d63723614c5\",\n                        \"reason\": \"Falta de asistencia\",\n                        \"studentId\": \"a66e6db1-2d93-4e83-aea6-7e234a004c70\",\n                        \"createdAt\": \"2024-09-22T20:26:33.900Z\"\n                    }\n                ]\n            }\n        },\n        {\n            \"student\": {\n                \"_id\": \"d4d3c7ef-d908-4a82-bc2d-9c4461c5b0aa\",\n                \"fullName\": \"Jorge Martínez\",\n                \"name\": \"Jorge\",\n                \"lastName\": \"Martínez\",\n                \"email\": \"jorge.martinez@example.com\",\n                \"restrictions\": [\n                    {\n                        \"_id\": \"b7e0a45b-0f1d-4b2d-9b56-8b6394ef7b0e\",\n                        \"reason\": \"Falta de entrega de tareas\",\n                        \"studentId\": \"d4d3c7ef-d908-4a82-bc2d-9c4461c5b0aa\",\n                        \"createdAt\": \"2024-09-22T20:26:33.900Z\"\n                    }\n                ]\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Student by grade range",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/search/grade?minGrade=5",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"search",
+								"grade"
+							],
+							"query": [
+								{
+									"key": "minGrade",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Search for Students with Grades Between 5.0 and 7",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/search/grade?minGrade=5&maxGrade=7",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"search",
+										"grade"
+									],
+									"query": [
+										{
+											"key": "minGrade",
+											"value": "5"
+										},
+										{
+											"key": "maxGrade",
+											"value": "7"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2202"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"89a-wkk1mrzlihX8r0dfqTrWY4BrBcE\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 26 Sep 2024 02:41:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"_id\": \"a1d42e38-1b76-4930-bd04-2a38f230058e\",\n            \"fullName\": \"Carla Silva\",\n            \"name\": \"Carla\",\n            \"lastName\": \"Silva\",\n            \"email\": \"carla.silva@example.com\",\n            \"grades\": [\n                {\n                    \"id\": \"d0b8c4a9-9b7c-49f2-b1b6-0f6a843c4c3f\",\n                    \"subjectName\": \"Inglés\",\n                    \"gradeName\": \"Ensayo\",\n                    \"grade\": 6.8,\n                    \"comment\": \"Excelente análisis literario y uso avanzado del idioma.\"\n                },\n                {\n                    \"id\": \"e19c89e7-cff0-4b9c-b072-08c80b8bba23\",\n                    \"subjectName\": \"Arte\",\n                    \"gradeName\": \"Trabajo en Grupo\",\n                    \"grade\": 5,\n                    \"comment\": \"Trabajo colaborativo efectivo, pero faltó cohesión en la presentación.\"\n                },\n                {\n                    \"id\": \"d7b7d1e4-96e3-434d-8d4a-bf5e3d95b9a8\",\n                    \"subjectName\": \"Música\",\n                    \"gradeName\": \"Participación en Clase\",\n                    \"grade\": 5.5,\n                    \"comment\": \"Muy activa en clase, con contribuciones valiosas a las discusiones.\"\n                },\n                {\n                    \"id\": \"c5b7e2e9-4a09-4230-a40b-5044f3d0d787\",\n                    \"subjectName\": \"Educación Física\",\n                    \"gradeName\": \"Examen\",\n                    \"grade\": 6,\n                    \"comment\": \"Comprensión clara de los temas, buen rendimiento físico.\"\n                }\n            ]\n        },\n        {\n            \"_id\": \"a66e6db1-2d93-4e83-aea6-7e234a004c70\",\n            \"fullName\": \"Carlos Gómez\",\n            \"name\": \"Carlos\",\n            \"lastName\": \"Gómez\",\n            \"email\": \"carlos.gomez@example.com\",\n            \"grades\": [\n                {\n                    \"id\": \"a91c4eae-36b7-4f5e-bfc0-6c6e0f5d3f5c\",\n                    \"subjectName\": \"Física\",\n                    \"gradeName\": \"Examen Final\",\n                    \"grade\": 6.2,\n                    \"comment\": \"Gran progreso, especialmente en los conceptos de dinámica.\"\n                },\n                {\n                    \"id\": \"b62f9c22-1b62-4a1d-9b72-b63f4d5f576e\",\n                    \"subjectName\": \"Historia\",\n                    \"gradeName\": \"Prueba de Historia Mundial\",\n                    \"grade\": 6.5,\n                    \"comment\": \"Excelente conocimiento de los eventos históricos.\"\n                }\n            ]\n        },\n        {\n            \"_id\": \"d4d3c7ef-d908-4a82-bc2d-9c4461c5b0aa\",\n            \"fullName\": \"Jorge Martínez\",\n            \"name\": \"Jorge\",\n            \"lastName\": \"Martínez\",\n            \"email\": \"jorge.martinez@example.com\",\n            \"grades\": [\n                {\n                    \"id\": \"c21d8f87-94b5-46b8-bb29-6f30b58c9e48\",\n                    \"subjectName\": \"Filosofía\",\n                    \"gradeName\": \"Examen Parcial\",\n                    \"grade\": 5.8,\n                    \"comment\": \"Buen análisis filosófico, pero algunas ideas podrían desarrollarse mejor.\"\n                },\n                {\n                    \"id\": \"a3f1c5c9-df9b-4397-a6d2-f2e6ae4f8824\",\n                    \"subjectName\": \"Química\",\n                    \"gradeName\": \"Examen Final\",\n                    \"grade\": 6.9,\n                    \"comment\": \"Muy buen desempeño en el examen final, claridad en los conceptos.\"\n                },\n                {\n                    \"id\": \"b3b226e7-d99b-43a8-9d52-30a1623f045b\",\n                    \"subjectName\": \"Lengua\",\n                    \"gradeName\": \"Participación en Clase\",\n                    \"grade\": 6.5,\n                    \"comment\": \"Muy activa en clase, con comentarios profundos sobre la literatura.\"\n                }\n            ]\n        }\n    ]\n}"
+						},
+						{
+							"name": "No Students Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/search/grade?minGrade=1&maxGrade=2",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"search",
+										"grade"
+									],
+									"query": [
+										{
+											"key": "minGrade",
+											"value": "1"
+										},
+										{
+											"key": "maxGrade",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "78"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4e-Agroi8yB++/uzHzBbaovsmWXpOI\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 26 Sep 2024 02:42:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"No students found with the specified grade range\"\n}"
+						},
+						{
+							"name": "Search Students with Minimum 5.0 grade",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/search/grade?minGrade=5",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"search",
+										"grade"
+									],
+									"query": [
+										{
+											"key": "minGrade",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2202"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"89a-wkk1mrzlihX8r0dfqTrWY4BrBcE\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 26 Sep 2024 02:43:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"_id\": \"a1d42e38-1b76-4930-bd04-2a38f230058e\",\n            \"fullName\": \"Carla Silva\",\n            \"name\": \"Carla\",\n            \"lastName\": \"Silva\",\n            \"email\": \"carla.silva@example.com\",\n            \"grades\": [\n                {\n                    \"id\": \"d0b8c4a9-9b7c-49f2-b1b6-0f6a843c4c3f\",\n                    \"subjectName\": \"Inglés\",\n                    \"gradeName\": \"Ensayo\",\n                    \"grade\": 6.8,\n                    \"comment\": \"Excelente análisis literario y uso avanzado del idioma.\"\n                },\n                {\n                    \"id\": \"e19c89e7-cff0-4b9c-b072-08c80b8bba23\",\n                    \"subjectName\": \"Arte\",\n                    \"gradeName\": \"Trabajo en Grupo\",\n                    \"grade\": 5,\n                    \"comment\": \"Trabajo colaborativo efectivo, pero faltó cohesión en la presentación.\"\n                },\n                {\n                    \"id\": \"d7b7d1e4-96e3-434d-8d4a-bf5e3d95b9a8\",\n                    \"subjectName\": \"Música\",\n                    \"gradeName\": \"Participación en Clase\",\n                    \"grade\": 5.5,\n                    \"comment\": \"Muy activa en clase, con contribuciones valiosas a las discusiones.\"\n                },\n                {\n                    \"id\": \"c5b7e2e9-4a09-4230-a40b-5044f3d0d787\",\n                    \"subjectName\": \"Educación Física\",\n                    \"gradeName\": \"Examen\",\n                    \"grade\": 6,\n                    \"comment\": \"Comprensión clara de los temas, buen rendimiento físico.\"\n                }\n            ]\n        },\n        {\n            \"_id\": \"a66e6db1-2d93-4e83-aea6-7e234a004c70\",\n            \"fullName\": \"Carlos Gómez\",\n            \"name\": \"Carlos\",\n            \"lastName\": \"Gómez\",\n            \"email\": \"carlos.gomez@example.com\",\n            \"grades\": [\n                {\n                    \"id\": \"a91c4eae-36b7-4f5e-bfc0-6c6e0f5d3f5c\",\n                    \"subjectName\": \"Física\",\n                    \"gradeName\": \"Examen Final\",\n                    \"grade\": 6.2,\n                    \"comment\": \"Gran progreso, especialmente en los conceptos de dinámica.\"\n                },\n                {\n                    \"id\": \"b62f9c22-1b62-4a1d-9b72-b63f4d5f576e\",\n                    \"subjectName\": \"Historia\",\n                    \"gradeName\": \"Prueba de Historia Mundial\",\n                    \"grade\": 6.5,\n                    \"comment\": \"Excelente conocimiento de los eventos históricos.\"\n                }\n            ]\n        },\n        {\n            \"_id\": \"d4d3c7ef-d908-4a82-bc2d-9c4461c5b0aa\",\n            \"fullName\": \"Jorge Martínez\",\n            \"name\": \"Jorge\",\n            \"lastName\": \"Martínez\",\n            \"email\": \"jorge.martinez@example.com\",\n            \"grades\": [\n                {\n                    \"id\": \"c21d8f87-94b5-46b8-bb29-6f30b58c9e48\",\n                    \"subjectName\": \"Filosofía\",\n                    \"gradeName\": \"Examen Parcial\",\n                    \"grade\": 5.8,\n                    \"comment\": \"Buen análisis filosófico, pero algunas ideas podrían desarrollarse mejor.\"\n                },\n                {\n                    \"id\": \"a3f1c5c9-df9b-4397-a6d2-f2e6ae4f8824\",\n                    \"subjectName\": \"Química\",\n                    \"gradeName\": \"Examen Final\",\n                    \"grade\": 6.9,\n                    \"comment\": \"Muy buen desempeño en el examen final, claridad en los conceptos.\"\n                },\n                {\n                    \"id\": \"b3b226e7-d99b-43a8-9d52-30a1623f045b\",\n                    \"subjectName\": \"Lengua\",\n                    \"gradeName\": \"Participación en Clase\",\n                    \"grade\": 6.5,\n                    \"comment\": \"Muy activa en clase, con comentarios profundos sobre la literatura.\"\n                }\n            ]\n        }\n    ]\n}"
+						},
+						{
+							"name": "Search Students with Maximum 4.0 grade",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/search/grade?maxGrade=4",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"search",
+										"grade"
+									],
+									"query": [
+										{
+											"key": "maxGrade",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1383"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"567-gvUYCgAr6LtnU9srMdc7Mly8kk0\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 26 Sep 2024 02:43:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"_id\": \"a1d42e38-1b76-4930-bd04-2a38f230058e\",\n            \"fullName\": \"Carla Silva\",\n            \"name\": \"Carla\",\n            \"lastName\": \"Silva\",\n            \"email\": \"carla.silva@example.com\",\n            \"grades\": [\n                {\n                    \"id\": \"f4b82d0e-7e98-4e0d-a40e-6e5f3e36c0ff\",\n                    \"subjectName\": \"Matemáticas\",\n                    \"gradeName\": \"Examen de Cálculo\",\n                    \"grade\": 3.1,\n                    \"comment\": \"Dificultades con la derivación de funciones.\"\n                }\n            ]\n        },\n        {\n            \"_id\": \"a66e6db1-2d93-4e83-aea6-7e234a004c70\",\n            \"fullName\": \"Carlos Gómez\",\n            \"name\": \"Carlos\",\n            \"lastName\": \"Gómez\",\n            \"email\": \"carlos.gomez@example.com\",\n            \"grades\": [\n                {\n                    \"id\": \"e41d9ef2-3bf2-47d6-9b4e-6dc9f7a888b1\",\n                    \"subjectName\": \"Matemáticas\",\n                    \"gradeName\": \"Prueba de Álgebra\",\n                    \"grade\": 3.8,\n                    \"comment\": \"Dificultades con ecuaciones lineales.\"\n                },\n                {\n                    \"id\": \"d41b8b9e-5b93-4d8b-8e26-2f5e7d8815aa\",\n                    \"subjectName\": \"Química\",\n                    \"gradeName\": \"Laboratorio\",\n                    \"grade\": 3.5,\n                    \"comment\": \"Se requiere mejorar en la precisión de los resultados.\"\n                }\n            ]\n        },\n        {\n            \"_id\": \"d4d3c7ef-d908-4a82-bc2d-9c4461c5b0aa\",\n            \"fullName\": \"Jorge Martínez\",\n            \"name\": \"Jorge\",\n            \"lastName\": \"Martínez\",\n            \"email\": \"jorge.martinez@example.com\",\n            \"grades\": [\n                {\n                    \"id\": \"f81d3e94-91f1-4c26-9f43-4ed3f0b75c34\",\n                    \"subjectName\": \"Matemáticas\",\n                    \"gradeName\": \"Examen de Geometría\",\n                    \"grade\": 3.2,\n                    \"comment\": \"Problemas con la visualización de figuras geométricas.\"\n                },\n                {\n                    \"id\": \"b93d8c25-66b8-4742-9363-8fd9db9a6221\",\n                    \"subjectName\": \"Física\",\n                    \"gradeName\": \"Tarea de Dinámica\",\n                    \"grade\": 2.9,\n                    \"comment\": \"No aplicó correctamente las leyes de Newton.\"\n                }\n            ]\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
