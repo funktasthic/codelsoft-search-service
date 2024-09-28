@@ -1,5 +1,4 @@
 const { Router } = require('express');
-const { validateJWT } = require('../middlewares/validateJWT');
 const {
   getStudentGradesAndRestrictions,
   getStudentByRestrictionOrReason,
@@ -73,11 +72,7 @@ const router = Router();
  *       500:
  *         description: Internal server error
  */
-router.get(
-  '/student',
-  [validateJWT, getStudentGradesAndRestrictionsValidator],
-  getStudentGradesAndRestrictions
-);
+router.get('/student', [getStudentGradesAndRestrictionsValidator], getStudentGradesAndRestrictions);
 
 /**
  * @swagger
@@ -130,7 +125,7 @@ router.get(
  */
 router.get(
   '/restriction',
-  [validateJWT, getStudentByRestrictionOrReasonValidator],
+  [getStudentByRestrictionOrReasonValidator],
   getStudentByRestrictionOrReason
 );
 
@@ -191,6 +186,6 @@ router.get(
  *       500:
  *         description: Internal server error
  */
-router.get('/grade', [validateJWT, getStudentsByGradeRangeValidator], getStudentsByGradeRange);
+router.get('/grade', [getStudentsByGradeRangeValidator], getStudentsByGradeRange);
 
 module.exports = router;

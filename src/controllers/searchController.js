@@ -15,18 +15,6 @@ const getStudentGradesAndRestrictions = async (req = request, res = response) =>
   try {
     const { search } = req.query;
 
-    // Get the user making the request
-    const user = await User.findById(req.user.id);
-    const userRole = await Role.findById(user.roleId);
-
-    // Check permissions for ADMIN or TEACHER
-    if (userRole.name !== 'ADMIN' && userRole.name !== 'TEACHER') {
-      return res.status(403).json({
-        success: false,
-        message: 'Insufficient permissions',
-      });
-    }
-
     // Find the STUDENT role
     const studentRole = await Role.findOne({ name: 'STUDENT' });
 
@@ -75,6 +63,7 @@ const getStudentGradesAndRestrictions = async (req = request, res = response) =>
       data: studentData,
     });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       success: false,
       message: error.message,
@@ -93,18 +82,6 @@ const getStudentGradesAndRestrictions = async (req = request, res = response) =>
 const getStudentByRestrictionOrReason = async (req = request, res = response) => {
   try {
     const { search } = req.query;
-
-    // Get the user making the request
-    const user = await User.findById(req.user.id);
-    const userRole = await Role.findById(user.roleId);
-
-    // Check permissions for ADMIN or TEACHER
-    if (userRole.name !== 'ADMIN' && userRole.name !== 'TEACHER') {
-      return res.status(403).json({
-        success: false,
-        message: 'Insufficient permissions',
-      });
-    }
 
     // Search for restrictions by ID or reason
     const restrictions = await Restriction.find({
@@ -177,18 +154,6 @@ const getStudentByRestrictionOrReason = async (req = request, res = response) =>
 const getStudentsByGradeRange = async (req = request, res = response) => {
   try {
     const { minGrade, maxGrade } = req.query;
-
-    // Get the user making the request
-    const user = await User.findById(req.user.id);
-    const userRole = await Role.findById(user.roleId);
-
-    // Check permissions for ADMIN or TEACHER
-    if (userRole.name !== 'ADMIN' && userRole.name !== 'TEACHER') {
-      return res.status(403).json({
-        success: false,
-        message: 'Insufficient permissions',
-      });
-    }
 
     // Search for students by grade range
     const gradeQuery = {};

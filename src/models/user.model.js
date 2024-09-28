@@ -34,10 +34,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       ref: 'Role',
     },
-    token: {
-      type: String,
-      default: null,
-    },
   },
   {
     timestamps: true,
