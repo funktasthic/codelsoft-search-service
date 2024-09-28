@@ -2,8 +2,6 @@ const { response, request } = require('express');
 const User = require('../models/user.model');
 const Role = require('../models/role.model');
 const bcryptjs = require('bcryptjs');
-const generateJWT = require('../utils/generateJWT');
-const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const { v4: uuidv4 } = require('uuid');
 
@@ -47,9 +45,6 @@ const login = async (req = request, res = response) => {
       });
     }
 
-    // Generate JWT
-    const token = await generateJWT(user.id);
-
     const { id, name, lastName, email: emailUser } = user;
 
     const dataUser = {
@@ -58,7 +53,6 @@ const login = async (req = request, res = response) => {
       lastName,
       email: emailUser,
       role: role.name,
-      token: token,
     };
 
     return res.status(200).json({
@@ -71,67 +65,6 @@ const login = async (req = request, res = response) => {
       success: false,
       error: true,
       message: error.message,
-    });
-  }
-};
-
-/**
- * Verify the token in the Authorization header of the request.
- * If the token is valid, return the user data and the token.
- * If the token is invalid or expired, return an error message.
- * @param {Request} req - Request object
- * @param {Response} res - Response object
- * @returns {Promise<void>}
- */
-const validateToken = async (req = request, res = response) => {
-  const authHeader = req.headers['authorization'];
-
-  // Separate the token from the "Bearer" prefix
-  token = authHeader && authHeader.split(' ')[1];
-
-  if (!token) {
-    return res.status(401).json({
-      success: false,
-      message: 'No token provided',
-    });
-  }
-
-  try {
-    const { id } = jwt.verify(token, process.env.JWT_SECRET);
-
-    const user = await User.findById(id);
-
-    const { name, lastName, email, roleId } = user;
-
-    const dataUser = {
-      id,
-      name,
-      lastName,
-      email,
-      roleId,
-      token: token,
-    };
-
-    if (user) {
-      return res.status(200).json({
-        success: true,
-        message: 'Token valid',
-        data: dataUser,
-      });
-    }
-  } catch (error) {
-    if (error.name === 'TokenExpiredError') {
-      return res.status(401).json({
-        success: false,
-        message: 'Token expired',
-        expired: true,
-        error,
-      });
-    }
-    return res.status(401).json({
-      success: false,
-      message: 'Token invalid',
-      error,
     });
   }
 };
@@ -191,9 +124,6 @@ const register = async (req = request, res = response) => {
     // Save the user in DB
     await user.save();
 
-    // Generate JWT
-    const token = await generateJWT(user.id);
-
     const dataUser = {
       id: user.id,
       name: user.name,
@@ -203,7 +133,6 @@ const register = async (req = request, res = response) => {
       phone: user.phone,
       password: user.password,
       roleId: user.roleId,
-      token: token,
     };
 
     return res.status(201).json({
@@ -224,5 +153,4 @@ const register = async (req = request, res = response) => {
 module.exports = {
   login,
   register,
-  validateToken,
 };

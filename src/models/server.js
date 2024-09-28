@@ -30,6 +30,7 @@ class Server {
     this.paths = {
       auth: '/api/auth',
       search: '/api/search',
+      grade: '/api/grades',
       docs: '/api/docs',
     };
 
@@ -63,6 +64,10 @@ class Server {
   routes() {
     this.app.use(this.paths.auth, require('../routes/authRoutes'));
     this.app.use(this.paths.search, require('../routes/searchRoutes'));
+    this.app.use(this.paths.grade, require('../routes/gradeRoutes'));
+    this.app.get('/', (req, res) => {
+      res.redirect(this.paths.docs);
+    });
   }
 
   async dbConnection() {

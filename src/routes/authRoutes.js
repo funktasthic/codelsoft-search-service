@@ -1,7 +1,7 @@
 const { Router } = require('express');
 
 // Controllers
-const { login, validateToken, register } = require('../controllers/authController');
+const { login, register } = require('../controllers/authController');
 
 // Validators
 const { loginValidator, registerValidator } = require('../validators/authValidator');
@@ -115,39 +115,5 @@ router.post('/register', [registerValidator], register);
  *         description: Server error
  */
 router.post('/login', [loginValidator], login);
-
-/**
- * @swagger
- * /api/auth/verify-token:
- *   get:
- *     summary: Verify JWT token
- *     description: Validate a user's JWT token
- *     tags: [Auth]
- *     responses:
- *       200:
- *         description: Token is valid
- *         content:
- *           application/json:
- *             example:
- *               success: true
- *               message: "Token valid"
- *               data:
- *                 id: "a1234567-b890-1234-5678-cdef12345678"
- *                 name: "John"
- *                 lastName: "Doe"
- *                 email: "johndoe@example.com"
- *                 roleId: "role-id-here"
- *                 token: "jwt-token-here"
- *       401:
- *         description: Unauthorized
- *         content:
- *           application/json:
- *             example:
- *               success: false
- *               message: "No token provided"
- *       500:
- *         description: Server error
- */
-router.get('/verify-token', validateToken);
 
 module.exports = router;
