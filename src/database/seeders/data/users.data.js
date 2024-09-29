@@ -1,6 +1,3 @@
-const bcryptjs = require('bcryptjs');
-const salt = bcryptjs.genSaltSync();
-
 const users = [
   {
     _id: 'a66e6db1-2d93-4e83-aea6-7e234a004c70',
@@ -8,7 +5,6 @@ const users = [
     lastName: 'Gómez',
     fullName: 'Carlos Gómez',
     email: 'carlos.gomez@example.com',
-    password: bcryptjs.hashSync('password123', salt),
     roleId: 'fca2f5bb-249d-4e5a-bb69-1d938872f07f',
   },
   {
@@ -17,7 +13,6 @@ const users = [
     lastName: 'Martínez',
     fullName: 'Jorge Martínez',
     email: 'jorge.martinez@example.com',
-    password: bcryptjs.hashSync('password123', salt),
     roleId: 'fca2f5bb-249d-4e5a-bb69-1d938872f07f',
   },
   {
@@ -26,7 +21,6 @@ const users = [
     lastName: 'Silva',
     fullName: 'Carla Silva',
     email: 'carla.silva@example.com',
-    password: bcryptjs.hashSync('password123', salt),
     roleId: 'fca2f5bb-249d-4e5a-bb69-1d938872f07f',
   },
   {
@@ -35,7 +29,6 @@ const users = [
     lastName: 'Ruiz',
     fullName: 'Pedro Ruiz',
     email: 'pedro.ruiz@example.com',
-    password: bcryptjs.hashSync('password123', salt),
     roleId: 'cbe0e8b5-0a16-42d4-bb9b-8d6608a3ff8b',
   },
   {
@@ -44,7 +37,6 @@ const users = [
     lastName: 'Gómez',
     fullName: 'Elena Gómez',
     email: 'elena.gomez@example.com',
-    password: bcryptjs.hashSync('password123', salt),
     roleId: 'cbe0e8b5-0a16-42d4-bb9b-8d6608a3ff8b',
   },
   {
@@ -53,7 +45,6 @@ const users = [
     lastName: 'Avendaño',
     fullName: 'Ignacio Avendaño',
     email: 'ignacio.avendano@alumnos.ucn.cl',
-    password: bcryptjs.hashSync('admin123', salt),
     roleId: 'b8a9f9a6-7a34-4f96-bd3c-72f1f623df9c',
   },
 ];

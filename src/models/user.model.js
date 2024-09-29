@@ -24,12 +24,6 @@ const userSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    password: {
-      type: String,
-      required: function () {
-        return this.role && this.role.name !== 'STUDENT';
-      },
-    },
     roleId: {
       type: String,
       ref: 'Role',

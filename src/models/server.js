@@ -28,9 +28,10 @@ class Server {
 
     // Paths
     this.paths = {
-      auth: '/api/auth',
+      user: '/api/users',
       search: '/api/search',
       grade: '/api/grades',
+      restriction: '/api/restrictions',
       docs: '/api/docs',
     };
 
@@ -62,9 +63,10 @@ class Server {
   }
 
   routes() {
-    this.app.use(this.paths.auth, require('../routes/authRoutes'));
+    this.app.use(this.paths.user, require('../routes/userRoutes'));
     this.app.use(this.paths.search, require('../routes/searchRoutes'));
     this.app.use(this.paths.grade, require('../routes/gradeRoutes'));
+    this.app.use(this.paths.restriction, require('../routes/restrictionRoutes'));
     this.app.get('/', (req, res) => {
       res.redirect(this.paths.docs);
     });
@@ -107,17 +109,11 @@ class Server {
     this.app.use(this.paths.docs, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
   }
 
-  async openSwagger() {
-    const module = await import('open');
-    await module.default(`http://localhost:${this.port}/api/docs`);
-  }
-
   listen() {
-    this.server.listen(this.port, async () => {
+    this.server.listen(this.port, () => {
       console.log(
         `\x1b[34m----------------------------\nSERVER RUNNING ON PORT: \x1b[1m${this.port}\n----------------------------\x1b[0m`
       );
-      await this.openSwagger();
     });
   }
 }

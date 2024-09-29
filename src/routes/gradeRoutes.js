@@ -1,16 +1,32 @@
 const { Router } = require('express');
 
 // Controllers
-const { createGrades, getAllGrades, editGrade } = require('../controllers/gradeController');
+const {
+  createGrade,
+  getAllGrades,
+  getGrade,
+  deleteGrade,
+  updateGrade,
+} = require('../controllers/gradeController');
 
 // Validators
+const { createGradeValidator, updateGradeValidator } = require('../validators/gradeValidator');
 
 const router = Router();
 
+// Get all grades
 router.get('/all', getAllGrades);
 
-router.post('/create', createGrades);
+// Get grade
+router.get('/:id', getGrade);
 
-router.put('/edit/:id', editGrade);
+// Create grade
+router.post('/create', [createGradeValidator], createGrade);
+
+// Update grade
+router.put('/update/:id', [updateGradeValidator], updateGrade);
+
+// Delete grade
+router.delete('/:id', deleteGrade);
 
 module.exports = router;
