@@ -102,7 +102,7 @@ class Server {
         },
         servers: [
           {
-            url: `http://localhost:${this.port}`,
+            url: `https://codelsoft-search-service.onrender.com`,
           },
         ],
       },
