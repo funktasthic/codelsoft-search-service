@@ -104,6 +104,9 @@ class Server {
           {
             url: 'https://codelsoft-search-service.onrender.com',
           },
+          {
+            url: 'http://localhost:3000',
+          },
         ],
       },
       apis: ['./src/routes/*.js', './src/models/*.js'],
