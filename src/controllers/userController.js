@@ -4,10 +4,20 @@ const User = require('../models/user.model');
 const Role = require('../models/role.model');
 const { v4: uuidv4 } = require('uuid');
 
+/**
+ * @description Get all users
+ *
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ *
+ * @returns {Promise<import('express').Response>}
+ */
 const getAllUsers = async (req = request, res = response) => {
   try {
+    // Get all users
     const users = await User.find();
 
+    // Verify if any users exists
     if (users.length === 0) {
       return res.status(404).json({
         success: false,
@@ -41,12 +51,21 @@ const getAllUsers = async (req = request, res = response) => {
   }
 };
 
+/**
+ * Retrieves a single user by ID
+ * @function
+ * @param {Object} req - Request object
+ * @param {Object} res - Response object
+ * @returns {Promise<import('express').Response>}
+ */
 const getUser = async (req = request, res = response) => {
   try {
     const { id } = req.params;
 
+    // Find user by ID
     const user = await User.findById(id);
 
+    // Verify if the user exists
     if (!user) {
       return res.status(404).json({
         success: false,
@@ -77,6 +96,13 @@ const getUser = async (req = request, res = response) => {
   }
 };
 
+/**
+ * Creates a new user in the system
+ * @function
+ * @param {Object} req - Request object
+ * @param {Object} res - Response object
+ * @returns {Promise<import('express').Response>}
+ */
 const createUser = async (req = request, res = response) => {
   try {
     const { name, lastName, email, roleName } = req.body;
@@ -142,6 +168,13 @@ const createUser = async (req = request, res = response) => {
   }
 };
 
+/**
+ * Updates an existing user
+ * @function
+ * @param {Object} req - Request object
+ * @param {Object} res - Response object
+ * @returns {Promise<import('express').Response>}
+ */
 const updateUser = async (req = request, res = response) => {
   try {
     const { id } = req.params;
@@ -201,6 +234,14 @@ const updateUser = async (req = request, res = response) => {
     });
   }
 };
+
+/**
+ * Deletes a user by ID
+ * @function
+ * @param {Object} req - Request object
+ * @param {Object} res - Response object
+ * @returns {Promise<import('express').Response>}
+ */
 
 const deleteUser = async (req = request, res = response) => {
   try {

@@ -5,10 +5,18 @@ const Role = require('../models/role.model');
 const Restriction = require('../models/restriction.model');
 const RestrictionService = require('../services/restrictionService');
 
+/**
+ * @function getAllRestrictions
+ * @description Retrieve all restrictions
+ * @returns {Promise<void>}
+ * @throws {Error}
+ */
 const getAllRestrictions = async (req = request, res = response) => {
   try {
+    // Find all restrictions
     const restrictions = await Restriction.find();
 
+    // Verify if any restrictions exists
     if (restrictions.length === 0) {
       return res.status(404).json({
         success: false,
@@ -31,12 +39,21 @@ const getAllRestrictions = async (req = request, res = response) => {
   }
 };
 
+/**
+ * @function getRestriction
+ * @description Retrieve a specific restriction by ID
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ *
+ * @returns {Promise<import('express').Response>}
+ */
 const getRestriction = async (req = request, res = response) => {
   try {
     const { id } = req.params;
-
+    // Find restriction by ID
     const restriction = await Restriction.findById(id);
 
+    // Verify if restriction exists
     if (!restriction) {
       return res.status(404).json({
         success: false,
@@ -59,10 +76,22 @@ const getRestriction = async (req = request, res = response) => {
   }
 };
 
+/**
+ * @function createRestriction
+ * @description Creates a new restriction in the database
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ * @returns {Promise<import('express').Response>}
+ */
+/**
+ * @prop {string} reason - The reason for the restriction
+ * @prop {string} studentId - The ID of the associated student
+ */
 const createRestriction = async (req = request, res = response) => {
   try {
     const { reason, studentId } = req.body;
 
+    // Validate if the user exists
     const existingUser = await User.findOne({ _id: studentId });
 
     if (!existingUser) {
@@ -73,6 +102,7 @@ const createRestriction = async (req = request, res = response) => {
       });
     }
 
+    // Validate if the user is a student
     const role = await Role.findById(existingUser.roleId);
 
     if (!role || role.name !== 'STUDENT') {
@@ -83,6 +113,7 @@ const createRestriction = async (req = request, res = response) => {
       });
     }
 
+    // Create restriction
     const restrictionData = { reason, studentId };
     const dataRestriction = await RestrictionService.createRestriction(restrictionData);
 
@@ -100,6 +131,17 @@ const createRestriction = async (req = request, res = response) => {
   }
 };
 
+/**
+ * @function updateRestriction
+ * @description Updates an existing restriction in the database
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ * @returns {Promise<import('express').Response>}
+ */
+/**
+ * @prop {string} id - The ID of the restriction
+ * @prop {string} reason - The new reason for the restriction
+ */
 const updateRestriction = async (req = request, res = response) => {
   try {
     const { id } = req.params;
@@ -129,6 +171,16 @@ const updateRestriction = async (req = request, res = response) => {
   }
 };
 
+/**
+ * @function deleteRestriction
+ * @description Deletes a restriction in the database
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ * @returns {Promise<import('express').Response>}
+ */
+/**
+ * @prop {string} id - The ID of the restriction
+ */
 const deleteRestriction = async (req = request, res = response) => {
   try {
     const { id } = req.params;
