@@ -19,7 +19,7 @@ const router = Router();
  *     summary: Search for a student's grades and restrictions
  *     description: Retrieves a student's grades and restrictions by ID or full name.
  *     tags:
- *       - Students
+ *       - Search
  *     parameters:
  *       - name: search
  *         in: query
@@ -81,7 +81,7 @@ router.get('/student', [getStudentGradesAndRestrictionsValidator], getStudentGra
  *     summary: Search students by restriction or reason
  *     description: Retrieves students associated with a specific restriction by ID or reason.
  *     tags:
- *       - Restrictions
+ *       - Search
  *     parameters:
  *       - name: search
  *         in: query
@@ -136,7 +136,7 @@ router.get(
  *     summary: Search students by grade range
  *     description: Retrieves students whose grades fall within a specified range.
  *     tags:
- *       - Grades
+ *       - Search
  *     parameters:
  *       - name: minGrade
  *         in: query

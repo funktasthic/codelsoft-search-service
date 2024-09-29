@@ -1,883 +1,11 @@
 {
 	"info": {
-		"_postman_id": "edd5e403-5a28-49ea-a907-202cd97c8a53",
+		"_postman_id": "4b37a2d9-5861-417b-8937-4275bbc91327",
 		"name": "codelsoft",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "29974575"
 	},
 	"item": [
-		{
-			"name": "Auth",
-			"item": [
-				{
-					"name": "Verify Token",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3000/api/auth/verify-token",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"auth",
-								"verify-token"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Valid Token",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:3000/api/auth/verify-token",
-									"host": [
-										"localhost"
-									],
-									"port": "3000",
-									"path": [
-										"api",
-										"auth",
-										"verify-token"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "*"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "414"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"19e-bkfEy628acLhygZI7Um5bX1K2TQ\""
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 26 Sep 2024 02:25:50 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"success\": true,\n    \"message\": \"Token valid\",\n    \"data\": {\n        \"id\": \"d4d3c7ef-d908-4a82-bc2d-9c4461c5b0aa\",\n        \"name\": \"Jorge\",\n        \"lastName\": \"Martínez\",\n        \"email\": \"jorge.martinez@example.com\",\n        \"roleId\": \"fca2f5bb-249d-4e5a-bb69-1d938872f07f\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ0ZDNjN2VmLWQ5MDgtNGE4Mi1iYzJkLTljNDQ2MWM1YjBhYSIsImlhdCI6MTcyNzMxNzQ2MywiZXhwIjoxNzI3MzUzNDYzfQ.V541IIz7gPAbG8wjrlPmWeqNRpPWIlWTLbIw7pTxGzw\"\n    }\n}"
-						},
-						{
-							"name": "Token Invalid",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:3000/api/auth/verify-token",
-									"host": [
-										"localhost"
-									],
-									"port": "3000",
-									"path": [
-										"api",
-										"auth",
-										"verify-token"
-									]
-								}
-							},
-							"status": "Unauthorized",
-							"code": 401,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "*"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "106"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"6a-wFHhKRu+SqRzkLj7x0fbHSMMbbQ\""
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 26 Sep 2024 02:26:21 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"success\": false,\n    \"message\": \"Token invalid\",\n    \"error\": {\n        \"name\": \"JsonWebTokenError\",\n        \"message\": \"jwt malformed\"\n    }\n}"
-						},
-						{
-							"name": "No Token Provided",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:3000/api/auth/verify-token",
-									"host": [
-										"localhost"
-									],
-									"port": "3000",
-									"path": [
-										"api",
-										"auth",
-										"verify-token"
-									]
-								}
-							},
-							"status": "Unauthorized",
-							"code": 401,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "*"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "47"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"2f-VwoH6g/NSC3v0iJZlTnsI5fj3wE\""
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 26 Sep 2024 02:28:43 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"success\": false,\n    \"message\": \"No token provided\"\n}"
-						}
-					]
-				},
-				{
-					"name": "Register any User",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var data = JSON.parse(responseBody);\r",
-									"pm.environment.set(\"token\", data.data.token);"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Renato\",\r\n    \"lastName\": \"Morales\",\r\n    \"email\": \"renato.morales@alumnos.ucn.cl\",\r\n    \"password\": \"password123\",\r\n    \"phone\": \"+56952186687\",\r\n    \"roleName\": \"ADMIN\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3000/api/auth/register",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"auth",
-								"register"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Successful Registration",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"name\": \"Jane\",\r\n  \"lastName\": \"Smith\",\r\n  \"email\": \"jane.smith@example.com\",\r\n  \"password\": \"password123\",\r\n  \"phone\": \"123456789\",\r\n  \"roleName\": \"STUDENT\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:3000/api/auth/register",
-									"host": [
-										"localhost"
-									],
-									"port": "3000",
-									"path": [
-										"api",
-										"auth",
-										"register"
-									]
-								}
-							},
-							"status": "Created",
-							"code": 201,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "*"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "517"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"205-2QS/u50ACVIa+yy4wVRR3vPeucA\""
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 26 Sep 2024 02:21:33 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"e32bd1e6-b8b5-4da0-92d1-76855e4dfe44\",\n        \"name\": \"Jane\",\n        \"lastName\": \"Smith\",\n        \"fullName\": \"Jane Smith\",\n        \"email\": \"jane.smith@example.com\",\n        \"password\": \"$2a$10$z8GJNhen4Tx/OpNw6o1USOwdws9oYtnUFtDl2TVyM9EOcUiqx.Ste\",\n        \"roleId\": \"fca2f5bb-249d-4e5a-bb69-1d938872f07f\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImUzMmJkMWU2LWI4YjUtNGRhMC05MmQxLTc2ODU1ZTRkZmU0NCIsImlhdCI6MTcyNzMxNzI5MywiZXhwIjoxNzI3MzUzMjkzfQ.KEj2zE1eoK5KbUHKzqQTMiT4PHsNjjlnMX_RVs-DUIs\"\n    },\n    \"message\": \"User created successfully\"\n}"
-						},
-						{
-							"name": "User Already Exists",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Ignacio\",\r\n    \"lastName\": \"Avendaño\",\r\n    \"email\": \"ignacio.avendano@alumnos.ucn.cl\",\r\n    \"password\": \"password123\",\r\n    \"phone\": \"+56952186687\",\r\n    \"roleName\": \"ADMIN\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:3000/api/auth/register",
-									"host": [
-										"localhost"
-									],
-									"port": "3000",
-									"path": [
-										"api",
-										"auth",
-										"register"
-									]
-								}
-							},
-							"status": "Conflict",
-							"code": 409,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "*"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "76"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"4c-qdwNFjctVGopPV5S3H8eraPjVC8\""
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 26 Sep 2024 02:22:16 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"success\": false,\n    \"message\": \"User already exists in the system\",\n    \"error\": true\n}"
-						},
-						{
-							"name": "Role Not Found",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Ernes\",\r\n    \"lastName\": \"Fuenzalida\",\r\n    \"email\": \"ernes.fuenzalida@alumnos.ucn.cl\",\r\n    \"password\": \"password123\",\r\n    \"phone\": \"+56952186687\",\r\n    \"roleName\": \"UNKNOWN_ROLE\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:3000/api/auth/register",
-									"host": [
-										"localhost"
-									],
-									"port": "3000",
-									"path": [
-										"api",
-										"auth",
-										"register"
-									]
-								}
-							},
-							"status": "Not Found",
-							"code": 404,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "*"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "57"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"39-N8ho37BIBIh9gTyJwcPVQ6lRMus\""
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 26 Sep 2024 02:23:25 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"success\": false,\n    \"message\": \"Role not found\",\n    \"error\": true\n}"
-						}
-					]
-				},
-				{
-					"name": "Login Admin",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var data = JSON.parse(responseBody);\r",
-									"pm.environment.set(\"token\", data.data.token);"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"ignacio.avendano@alumnos.ucn.cl\",\r\n    \"password\": \"admin123\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3000/api/auth/login",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"auth",
-								"login"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Successful Login",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"email\": \"ignacio.avendano@alumnos.ucn.cl\",\r\n  \"password\": \"admin123\"\r\n}\r\n",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:3000/api/auth/login",
-									"host": [
-										"localhost"
-									],
-									"port": "3000",
-									"path": [
-										"api",
-										"auth",
-										"login"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "*"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "395"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"18b-bDMKKzeegvXmor4LHIbs7Po25yc\""
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 26 Sep 2024 02:15:48 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"d4fc4c2d-e9b1-4d6e-96a4-9f95a2f773f7\",\n        \"name\": \"Ignacio\",\n        \"lastName\": \"Avendaño\",\n        \"email\": \"ignacio.avendano@alumnos.ucn.cl\",\n        \"role\": \"ADMIN\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ0ZmM0YzJkLWU5YjEtNGQ2ZS05NmE0LTlmOTVhMmY3NzNmNyIsImlhdCI6MTcyNzMxNjk0OCwiZXhwIjoxNzI3MzUyOTQ4fQ.hZfxplumwnST6TJbmMgqAikAK4VffUspIa0Pj1D1FTo\"\n    },\n    \"message\": \"Login successfully\"\n}"
-						},
-						{
-							"name": "Invalid Credentials",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"email\": \"student@example.com\",\r\n  \"password\": \"wrongPassword\"\r\n}\r\n",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:3000/api/auth/login",
-									"host": [
-										"localhost"
-									],
-									"port": "3000",
-									"path": [
-										"api",
-										"auth",
-										"login"
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "*"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "46"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"2e-2oexAPzzrUgLGYhuWdtm64eEqTY\""
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 26 Sep 2024 02:16:18 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"error\": true,\n    \"message\": \"Invalid credentials\"\n}"
-						}
-					]
-				},
-				{
-					"name": "Login Teacher",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var data = JSON.parse(responseBody);\r",
-									"pm.environment.set(\"token\", data.data.token);"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"pedro.ruiz@example.com\",\r\n    \"password\": \"password123\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3000/api/auth/login",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"auth",
-								"login"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Successful Login",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"email\": \"pedro.ruiz@example.com\",\r\n    \"password\": \"password123\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:3000/api/auth/login",
-									"host": [
-										"localhost"
-									],
-									"port": "3000",
-									"path": [
-										"api",
-										"auth",
-										"login"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "*"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "381"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"17d-9TBZfMC4tq5Fj3dCjB7DIxDwjrE\""
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 26 Sep 2024 02:20:29 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"f5fbd7d6-7e61-4a80-b174-3b8a77d45714\",\n        \"name\": \"Pedro\",\n        \"lastName\": \"Ruiz\",\n        \"email\": \"pedro.ruiz@example.com\",\n        \"role\": \"TEACHER\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY1ZmJkN2Q2LTdlNjEtNGE4MC1iMTc0LTNiOGE3N2Q0NTcxNCIsImlhdCI6MTcyNzMxNzIyOSwiZXhwIjoxNzI3MzUzMjI5fQ.EmsfU6dlPCgajrzO4p62h7jt_HfCwMhE-ykrmtk2PdE\"\n    },\n    \"message\": \"Login successfully\"\n}"
-						}
-					]
-				},
-				{
-					"name": "Login Student",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var data = JSON.parse(responseBody);\r",
-									"pm.environment.set(\"token\", data.data.token);"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"jorge.martinez@example.com\",\r\n    \"password\": \"password123\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3000/api/auth/login",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"auth",
-								"login"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Successful Login",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"email\": \"jorge.martinez@example.com\",\r\n    \"password\": \"password123\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:3000/api/auth/login",
-									"host": [
-										"localhost"
-									],
-									"port": "3000",
-									"path": [
-										"api",
-										"auth",
-										"login"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "*"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "390"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"186-lEjMhRoB4+7KsZoOwvj/CtGamAQ\""
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 26 Sep 2024 02:21:06 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"d4d3c7ef-d908-4a82-bc2d-9c4461c5b0aa\",\n        \"name\": \"Jorge\",\n        \"lastName\": \"Martínez\",\n        \"email\": \"jorge.martinez@example.com\",\n        \"role\": \"STUDENT\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ0ZDNjN2VmLWQ5MDgtNGE4Mi1iYzJkLTljNDQ2MWM1YjBhYSIsImlhdCI6MTcyNzMxNzI2NiwiZXhwIjoxNzI3MzUzMjY2fQ.FfgbLDog3Wzz6lU8zWGn-5y-JnhTGRlqo9akvb66qTk\"\n    },\n    \"message\": \"Login successfully\"\n}"
-						}
-					]
-				}
-			]
-		},
 		{
 			"name": "Search",
 			"item": [
@@ -885,14 +13,7 @@
 					"name": "Get Student grades and restrictions",
 					"request": {
 						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "GET",
 						"header": [],
@@ -1178,14 +299,7 @@
 					"name": "Get Student by restriction/reason",
 					"request": {
 						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "GET",
 						"header": [],
@@ -1407,14 +521,7 @@
 					"name": "Get Student by grade range",
 					"request": {
 						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "GET",
 						"header": [],
@@ -1703,6 +810,417 @@
 							"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"_id\": \"a1d42e38-1b76-4930-bd04-2a38f230058e\",\n            \"fullName\": \"Carla Silva\",\n            \"name\": \"Carla\",\n            \"lastName\": \"Silva\",\n            \"email\": \"carla.silva@example.com\",\n            \"grades\": [\n                {\n                    \"id\": \"f4b82d0e-7e98-4e0d-a40e-6e5f3e36c0ff\",\n                    \"subjectName\": \"Matemáticas\",\n                    \"gradeName\": \"Examen de Cálculo\",\n                    \"grade\": 3.1,\n                    \"comment\": \"Dificultades con la derivación de funciones.\"\n                }\n            ]\n        },\n        {\n            \"_id\": \"a66e6db1-2d93-4e83-aea6-7e234a004c70\",\n            \"fullName\": \"Carlos Gómez\",\n            \"name\": \"Carlos\",\n            \"lastName\": \"Gómez\",\n            \"email\": \"carlos.gomez@example.com\",\n            \"grades\": [\n                {\n                    \"id\": \"e41d9ef2-3bf2-47d6-9b4e-6dc9f7a888b1\",\n                    \"subjectName\": \"Matemáticas\",\n                    \"gradeName\": \"Prueba de Álgebra\",\n                    \"grade\": 3.8,\n                    \"comment\": \"Dificultades con ecuaciones lineales.\"\n                },\n                {\n                    \"id\": \"d41b8b9e-5b93-4d8b-8e26-2f5e7d8815aa\",\n                    \"subjectName\": \"Química\",\n                    \"gradeName\": \"Laboratorio\",\n                    \"grade\": 3.5,\n                    \"comment\": \"Se requiere mejorar en la precisión de los resultados.\"\n                }\n            ]\n        },\n        {\n            \"_id\": \"d4d3c7ef-d908-4a82-bc2d-9c4461c5b0aa\",\n            \"fullName\": \"Jorge Martínez\",\n            \"name\": \"Jorge\",\n            \"lastName\": \"Martínez\",\n            \"email\": \"jorge.martinez@example.com\",\n            \"grades\": [\n                {\n                    \"id\": \"f81d3e94-91f1-4c26-9f43-4ed3f0b75c34\",\n                    \"subjectName\": \"Matemáticas\",\n                    \"gradeName\": \"Examen de Geometría\",\n                    \"grade\": 3.2,\n                    \"comment\": \"Problemas con la visualización de figuras geométricas.\"\n                },\n                {\n                    \"id\": \"b93d8c25-66b8-4742-9363-8fd9db9a6221\",\n                    \"subjectName\": \"Física\",\n                    \"gradeName\": \"Tarea de Dinámica\",\n                    \"grade\": 2.9,\n                    \"comment\": \"No aplicó correctamente las leyes de Newton.\"\n                }\n            ]\n        }\n    ]\n}"
 						}
 					]
+				}
+			]
+		},
+		{
+			"name": "Grades",
+			"item": [
+				{
+					"name": "Get All Grades",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/grades/all",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"grades",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Grade",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/grades/d0b8c4a9-9b7c-49f2-b1b6-0f6a843c4c3f",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"grades",
+								"d0b8c4a9-9b7c-49f2-b1b6-0f6a843c4c3f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Grade",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subjectName\": \"Educación Física\",\r\n    \"gradeName\": \"Ensayo cueca\",\r\n    \"grade\": 7,\r\n    \"comment\": \"Excelente análisis de coreografía y uso avanzado de movimientos.\",\r\n    \"studentId\": \"a66e6db1-2d93-4e83-aea6-7e234a004c70\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/grades/create",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"grades",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Grade",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subjectName\": \"Programación\",\r\n    \"gradeName\": \"Examen Final\",\r\n    \"grade\": \"7.0\",\r\n    \"comment\": \"Excelente\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/grades/update/e19c89e7-cff0-4b9c-b072-08c80b8bba23",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"grades",
+								"update",
+								"e19c89e7-cff0-4b9c-b072-08c80b8bba23"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Grade",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/grades/c5b7e2e9-4a09-4230-a40b-5044f3d0d787",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"grades",
+								"c5b7e2e9-4a09-4230-a40b-5044f3d0d787"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Restriction",
+			"item": [
+				{
+					"name": "Get All Restrictions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/restrictions/all",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"restrictions",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Restriction",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/restrictions/a12a7ef4-b4e3-4b3a-9584-0d63723614c5",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"restrictions",
+								"a12a7ef4-b4e3-4b3a-9584-0d63723614c5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Restriction",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"reason\": \"Falta a Proyeccion\",\r\n    \"studentId\": \"d4fc4c2d-e9b1-4d6e-96a4-9f95a2f773f7\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/restrictions/create",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"restrictions",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Restriction",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"reason\": \"No hay razones\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/restrictions/update/a12a7ef4-b4e3-4b3a-9584-0d63723614c5",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"restrictions",
+								"update",
+								"a12a7ef4-b4e3-4b3a-9584-0d63723614c5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Restriction",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/restrictions/d80fa8d6-bc36-470f-943c-cf6978d750f5",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"restrictions",
+								"d80fa8d6-bc36-470f-943c-cf6978d750f5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/users/all",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/users/f5fbd7d6-7e61-4a80-b174-3b8a77d45714",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"f5fbd7d6-7e61-4a80-b174-3b8a77d45714"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Nataly\",\r\n    \"lastName\": \"Silva\",\r\n    \"email\": \"nataly.silva@alumnos.ucn.cl\",\r\n    \"roleName\": \"TEACHER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/users/create",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Ernes\",\r\n    \"lastName\": \"Fuenzalida\",\r\n    \"email\": \"ernes.fuenzalida@alumnos.ucn.cl\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/users/update/c32ef726-16f2-4bb7-8374-3e7d7882b68a",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"update",
+								"c32ef726-16f2-4bb7-8374-3e7d7882b68a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/users/a66e6db1-2d93-4e83-aea6-7e234a004c70",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"a66e6db1-2d93-4e83-aea6-7e234a004c70"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

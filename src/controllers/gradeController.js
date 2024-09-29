@@ -1,55 +1,21 @@
 const { response, request } = require('express');
 require('dotenv').config();
-const { v4: uuidv4 } = require('uuid');
 const User = require('../models/user.model');
-const Grade = require('../models/grade.model');
 const Role = require('../models/role.model');
-
-const createGrades = async (req = request, res = response) => {
-  try {
-    const { subjectName, gradeName, grade, comment, studentId } = req.body;
-
-    const existingUser = await User.findOne({ studentId });
-
-    // Validate if the user exists
-    if (existingUser) {
-      return res.status(409).json({
-        success: false,
-        message: 'User already exists in the system',
-        error: true,
-      });
-    }
-
-    // Create a new grade
-    const newGrade = new Grade({
-      _id: uuidv4(),
-      subjectName,
-      gradeName,
-      grade,
-      comment,
-      studentId,
-    });
-
-    const dateGrade = await newGrade.save();
-
-    return res.status(201).json({
-      success: true,
-      data: dateGrade,
-      message: 'Grade created successfully',
-    });
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({
-      success: false,
-      error: true,
-      message: error.message,
-    });
-  }
-};
+const Grade = require('../models/grade.model');
+const GradeService = require('../services/gradeService');
 
 const getAllGrades = async (req = request, res = response) => {
   try {
     const grades = await Grade.find();
+
+    if (grades.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'No grades found',
+        error: true,
+      });
+    }
 
     return res.status(200).json({
       success: true,
@@ -57,7 +23,6 @@ const getAllGrades = async (req = request, res = response) => {
       message: 'Grades retrieved successfully',
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       success: false,
       error: true,
@@ -66,28 +31,13 @@ const getAllGrades = async (req = request, res = response) => {
   }
 };
 
-const editGrade = async (req = request, res = response) => {
+const getGrade = async (req = request, res = response) => {
   try {
     const { id } = req.params;
-    const { subjectName, gradeName, grade, comment, studentId } = req.body;
 
-    // Get the user making the request
-    const user = await User.findById(req.user.id);
-    const userRole = await Role.findById(user.roleId);
+    const grade = await Grade.findById(id);
 
-    // Check permissions for ADMIN or TEACHER
-    if (userRole.name !== 'ADMIN' && userRole.name !== 'TEACHER') {
-      return res.status(403).json({
-        success: false,
-        message: 'Insufficient permissions',
-      });
-    }
-
-    // Find the grade by ID
-    const gradeToEdit = await Grade.findById(id);
-
-    // Validate if the grade exists
-    if (!gradeToEdit) {
+    if (!grade) {
       return res.status(404).json({
         success: false,
         message: 'Grade not found',
@@ -95,19 +45,117 @@ const editGrade = async (req = request, res = response) => {
       });
     }
 
-    // Update the grade fields
-    gradeToEdit.subjectName = subjectName || gradeToEdit.subjectName;
-    gradeToEdit.gradeName = gradeName || gradeToEdit.gradeName;
-    gradeToEdit.grade = grade || gradeToEdit.grade;
-    gradeToEdit.comment = comment || gradeToEdit.comment;
-    gradeToEdit.studentId = studentId || gradeToEdit.studentId;
+    return res.status(200).json({
+      success: true,
+      data: grade,
+      message: 'Grade retrieved successfully',
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: true,
+      message: error.message,
+    });
+  }
+};
 
-    const updatedGrade = await gradeToEdit.save();
+const createGrade = async (req = request, res = response) => {
+  try {
+    const { subjectName, gradeName, grade, comment, studentId } = req.body;
+
+    const existingUser = await User.findOne({ _id: studentId });
+
+    if (!existingUser) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found',
+        error: true,
+      });
+    }
+
+    const role = await Role.findById(existingUser.roleId);
+
+    if (!role || role.name !== 'STUDENT') {
+      return res.status(403).json({
+        success: false,
+        message: 'Insufficient permissions',
+        error: true,
+      });
+    }
+
+    const gradeData = { subjectName, gradeName, grade, comment, studentId };
+
+    // Crear la calificación usando el servicio
+    const newGrade = await GradeService.createGrade(gradeData);
+
+    return res.status(201).json({
+      success: true,
+      data: newGrade,
+      message: 'Grade created successfully',
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: true,
+      message: error.message,
+    });
+  }
+};
+
+module.exports = {
+  createGrade,
+};
+
+const updateGrade = async (req = request, res = response) => {
+  try {
+    const { id } = req.params;
+    const { subjectName, gradeName, grade, comment } = req.body;
+
+    const gradeData = { subjectName, gradeName, grade, comment };
+    const updatedGrade = await Grade.findByIdAndUpdate(id, gradeData, {
+      new: true,
+    });
+
+    if (!updatedGrade) {
+      return res.status(404).json({
+        success: false,
+        message: 'Grade not found',
+        error: true,
+      });
+    }
 
     return res.status(200).json({
       success: true,
       data: updatedGrade,
       message: 'Grade updated successfully',
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: true,
+      message: error.message,
+    });
+  }
+};
+
+const deleteGrade = async (req = request, res = response) => {
+  try {
+    const { id } = req.params;
+
+    const deletedGrade = await Grade.findByIdAndDelete(id);
+
+    if (!deletedGrade) {
+      return res.status(404).json({
+        success: false,
+        message: 'Grade not found',
+        error: true,
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: deletedGrade,
+      message: 'Grade deleted successfully',
     });
   } catch (error) {
     console.log(error);
@@ -120,7 +168,9 @@ const editGrade = async (req = request, res = response) => {
 };
 
 module.exports = {
-  createGrades,
+  createGrade,
   getAllGrades,
-  editGrade,
+  getGrade,
+  updateGrade,
+  deleteGrade,
 };
