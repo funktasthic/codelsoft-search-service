@@ -59,7 +59,11 @@ class Server {
     this.app.use(express.json());
 
     // Cors
-    this.app.use(cors());
+    this.app.use(
+      cors({
+        origin: '*',
+      })
+    );
   }
 
   routes() {
@@ -98,7 +102,10 @@ class Server {
         },
         servers: [
           {
-            url: `http://localhost:${this.port}`,
+            url: 'https://codelsoft-search-service.onrender.com',
+          },
+          {
+            url: 'http://localhost:3000',
           },
         ],
       },
