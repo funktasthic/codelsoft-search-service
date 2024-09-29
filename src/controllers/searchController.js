@@ -155,7 +155,7 @@ const getStudentsByGradeRange = async (req = request, res = response) => {
   try {
     const { minGrade, maxGrade } = req.query;
 
-    // Search for students by grade range
+    // Build grade query with range
     const gradeQuery = {};
     if (minGrade) {
       gradeQuery.grade = { $gte: parseFloat(minGrade) };
@@ -164,12 +164,13 @@ const getStudentsByGradeRange = async (req = request, res = response) => {
       gradeQuery.grade = { ...gradeQuery.grade, $lte: parseFloat(maxGrade) };
     }
 
-    // Find students with the specified grade range
+    // Find grades within the specified range
     const grades = await Grade.find(gradeQuery).populate(
       'studentId',
       '_id fullName name lastName email'
     );
 
+    // Check if grades were found
     if (grades.length === 0) {
       return res.status(404).json({
         success: false,
@@ -179,28 +180,38 @@ const getStudentsByGradeRange = async (req = request, res = response) => {
 
     // Group results by student, only including the grades that match the range
     const studentData = grades.reduce((acc, grade) => {
-      if (!acc[grade.studentId._id]) {
-        acc[grade.studentId._id] = {
-          _id: grade.studentId._id,
-          fullName: grade.studentId.fullName,
-          name: grade.studentId.name,
-          lastName: grade.studentId.lastName,
-          email: grade.studentId.email,
-          grades: [],
-        };
+      if (grade.studentId) {
+        // Ensure studentId exists
+        if (!acc[grade.studentId._id]) {
+          acc[grade.studentId._id] = {
+            _id: grade.studentId._id,
+            fullName: grade.studentId.fullName,
+            name: grade.studentId.name,
+            lastName: grade.studentId.lastName,
+            email: grade.studentId.email,
+            grades: [],
+          };
+        }
+
+        // Add the grade that is in the range
+        acc[grade.studentId._id].grades.push({
+          id: grade._id,
+          subjectName: grade.subjectName,
+          gradeName: grade.gradeName,
+          grade: grade.grade,
+          comment: grade.comment,
+        });
       }
-
-      // Add the grade that is in the range
-      acc[grade.studentId._id].grades.push({
-        id: grade._id,
-        subjectName: grade.subjectName,
-        gradeName: grade.gradeName,
-        grade: grade.grade,
-        comment: grade.comment,
-      });
-
       return acc;
     }, {});
+
+    // Check if any students have valid data
+    if (Object.keys(studentData).length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'No students found for the given grade range',
+      });
+    }
 
     // Return student data
     return res.status(200).json({
@@ -208,6 +219,7 @@ const getStudentsByGradeRange = async (req = request, res = response) => {
       data: Object.values(studentData),
     });
   } catch (error) {
+    console.error(error);
     return res.status(500).json({
       success: false,
       message: error.message,
