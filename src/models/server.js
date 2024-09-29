@@ -102,7 +102,7 @@ class Server {
         },
         servers: [
           {
-            url: `https://codelsoft-search-service.onrender.com`,
+            url: 'https://codelsoft-search-service.onrender.com',
           },
         ],
       },
